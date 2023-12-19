@@ -59,6 +59,7 @@ class ProjectCard extends HTMLElement {
       font-weight: 500;
       border-bottom: 2.5px solid rgba(255, 0, 255, 0.8);
       margin-left: 10px;
+      padding-bottom: 2px;
     }
     .title {
       font-weight: bold;

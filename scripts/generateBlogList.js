@@ -3,7 +3,7 @@ const path = require('path');
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 
-const blogsHtmlDir = '../blog_files/blogs_html';
+const blogsHtmlDir = '../html/blogs_html';
 const templateHtmlFile = '../html/blogs-main-template.html';
 const outputHtmlFile = '../html/blogs-main.html';
 

@@ -20,7 +20,7 @@ class ProjectDialog extends HTMLElement {
     img.src = imgSrc;
     img.setAttribute('class', 'dialog-image');
 
-    const title = document.createElement('h3');
+    const title = document.createElement('p');
     let titleContent;
     if (projectLinkURL && projectLinkURL.length > 0) {
       titleContent = `<a href="${projectLinkURL}" target="_blank">${titleText}</a>`;
@@ -33,7 +33,7 @@ class ProjectDialog extends HTMLElement {
     company.setAttribute('class', 'company');
     let companyContent;
     if (companyLinkURL && companyLinkURL.length > 0) {
-      companyContent = `<a href="@${companyLinkURL}" target="_blank">${companyText}</a>`;
+      companyContent = `<a href="${companyLinkURL}" target="_blank">${companyText}</a>`;
     } else {
       companyContent = '@ ' + companyText;
     }
@@ -62,6 +62,7 @@ class ProjectDialog extends HTMLElement {
       githubLink.setAttribute('href', githubLinkURL);
       githubLink.setAttribute('target', '_blank');
       githubLink.setAttribute('class', 'github-link');
+      githubLink.textContent = 'GitHub';
       githubLink.className = 'github-link';
     } else {
       githubLink = document.createElement('p');
@@ -74,8 +75,8 @@ class ProjectDialog extends HTMLElement {
     closeButton.className = 'close-button';
 
     const techUsedElement = document.createElement('p');
-    techUsedElement.setAttribute('class', 'tech-used');
-    techUsedElement.textContent = 'Tech used: ';
+    techUsedElement.setAttribute('class', 'tech-stack');
+    techUsedElement.textContent = 'Tech stack: ';
     if (techUsedString && techUsedString.length > 0) {
       const techUsedArray = JSON.parse(techUsedString);
       const techUsedText = techUsedArray.join(', ');
@@ -88,8 +89,9 @@ class ProjectDialog extends HTMLElement {
     dialog.appendChild(companyAndTitle);
     dialog.appendChild(githubLink);
     dialog.appendChild(content);
-    dialog.appendChild(closeButton);
     dialog.appendChild(techUsedElement);
+    dialog.appendChild(closeButton);
+    dialog.appendChild(closeButton);
 
     const style = document.createElement('style');
     style.textContent = `
@@ -99,34 +101,39 @@ class ProjectDialog extends HTMLElement {
             border: 1px solid #ccc;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            font-weight: 500;
           }
           .dialog-content {
-            border-left: 4px solid rgba(0, 149, 255, 0.8);
             padding-left: 20px;
+            border-bottom: 2px solid #aaa;
+            border-top: 2px solid #aaa;
+            padding-top: 10px;
+            padding-bottom: 10px;
           }
           a {
             color: blue;
             text-decoration: none ;
           }
+          li {
+            list-style-type: square;
+          }
           .github-link {
-            border-left: 4px solid rgba(255, 0, 64, 0.8);
-            // border-left: 4px solid rgba(255, 42, 152, 0.8);
-            padding-left: 10px;
+            padding: 10px;
           }
           .company-and-title {
+            font-weight: 700;
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
+            // justify-content: space-between;
             font-size: 1.5em;
             align-items: center;
           }
           .company {
             font-weight: 700;
-            border-bottom: 4px solid rgba(255, 0, 255, 0.8);
+            padding: 5px;
           }
           .project-dialog img {
             max-width: 100%;
-            // height: 200px;
             object-fit: cover; 
           }
           .close-button {
@@ -149,9 +156,8 @@ class ProjectDialog extends HTMLElement {
             max-height: 200px;
             margin-top: 10px;
           }
-          .tech-used {
-            padding-left: 10px;
-            border-left: 4px solid rgba(5, 255, 0, 0.8);
+          .tech-stack {
+            padding: 10px;
           }
           @media screen and (max-width: 768px) {
             .project-dialog {

@@ -5,7 +5,8 @@ body {
 }
 
 .main-body {
-  max-width: 45vw;
+  // max-width: 45vw;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -36,11 +37,11 @@ body {
 
 .table-of-contents-column {
   border-right: 5px solid #cdcccc; 
-
 }
 
 .table-of-contents a {
   text-decoration: underline; 
+  color: black
 }
 
 .table-of-contents li {
@@ -52,9 +53,9 @@ body {
   color: rgb(163, 31, 162);
 }
 
-// li a {
-//   color: #333;
-// }
+.blog-content .table-of-contents {
+  display: none;
+}
 
 a {
   color: blue;
@@ -67,6 +68,7 @@ a {
   top: 100px; 
   overflow-y: auto;
   max-height: calc(100vh - 100px);
+  border: #cdcccc 5px solid;
 }
 
 .blog-content {
@@ -74,6 +76,7 @@ a {
   color: #333;
   font-family: 'Arial', sans-serif;
   line-height: 1.6; 
+  max-width: 80%;
 }
 
 .blog-content code {
@@ -82,21 +85,50 @@ a {
   overflow-wrap: break-word; 
 }
 
-.blog-content h1, .blog-content h2, .blog-content h3, .blog-content h4, .blog-content h5, .blog-content h6 {
+.blog-content h1, h2, h3, h4, h5, h6 {
   margin-top: 1em;
   margin-bottom: 0.5em;
   color: #222;
   font-weight: 700;
+}
+
+.blog-content h1 {
+  font-size: 2.5em;
+}
+
+.blog-content h2 {
   font-size: 2em;
+}
+
+.blog-content h3 {
+  font-size: 1.5em;
+}
+
+.blog-content h4 {
+  font-size: 1.2em;
+} 
+
+.blog-content h5 {
+  font-size: 1em;
 }
 
 .blog-content p {
   margin-bottom: 1em; 
 }
 
-// details:hover {
-//   cursor: pointer;
-// }
+code, pre {
+  background-color: #f5f5f5;  
+  color: rgb(255, 34, 123);
+  padding: 0.2em 0.4em; 
+  border-radius: 3px; 
+}
+
+pre {
+  white-space: pre-wrap;
+  padding: 1em; 
+  overflow-x: auto;
+}
+
 
 details summary {
   font-weight: 600;
@@ -130,7 +162,7 @@ details p{
 
 // FLOATING SQUARES
 
-$square-count: 10;
+$square-count: 20;
 $sway-type: "sway-left-to-right", "sway-right-to-left";
 $colors: #51eaea, #fffde1, #ff9d76, #FB3569;
 $rotation-direction: "rotate-left", "rotate-right";
@@ -193,7 +225,7 @@ $sway-amounts: 100%, -100%;
     &:nth-child(#{$i}) {
       --square-left-offset: #{random_range(0vw, 90vw)};
       --square-height: #{random_range(3vw, 15vw)};
-      --square-float-duration: #{random_range(20s, 20s)};
+      --square-float-duration: #{random_range(20s, 40s)};
       --square-float-delay: #{random_range(0s, 20s)};
       --square-sway-rotate-keyframe: sway-rotate-#{$i};
       // --square-sway-duration: #{random_range(0s, 4s)};

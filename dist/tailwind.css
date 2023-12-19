@@ -592,7 +592,6 @@ video {
 .font-semibold {
   font-weight: 600;
 }
-/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;500;600&display=swap'); */
 @media (min-width: 640px) {
 
   .sm\:grid-cols-2 {

@@ -1,13 +1,7 @@
 const fs = require('fs');
-const path = require('path');
 const { JSDOM } = require('jsdom');
 
-const blogHtmlFile = './test.html';
-const templateHtmlFile = '../html/single-blog-template.html';
-const outputDirectory = './';
-const outputHtmlFile = 'output.html';
-
-function attachBlogContent() {
+function attachBlogContent(blogHtmlFile, outputHtmlFile, templateHtmlFile) {
   const blogHtmlContent = fs.readFileSync(blogHtmlFile, 'utf8');
   const blogDom = new JSDOM(blogHtmlContent);
   const blogDocument = blogDom.window.document;
@@ -38,9 +32,8 @@ function attachBlogContent() {
     console.error('Blog content element not found.');
   }
 
-  const outputFileFullPath = path.join(outputDirectory, outputHtmlFile);
-  fs.writeFileSync(outputFileFullPath, templateDom.serialize());
-  console.log(`Blog content and TOC attached to ${outputFileFullPath}`);
+  fs.writeFileSync(outputHtmlFile, templateDom.serialize());
+  console.log(`Blog content and TOC attached to ${outputHtmlFile}`);
 }
 
-attachBlogContent();
+module.exports = attachBlogContent;
