@@ -6,7 +6,7 @@ const attachBlogContent = require('./attachBlogContent');
 const markdownDirectory = '../blog_files/blogs_markdown';
 const convertedHtmlDirectory = '../blog_files/partial_blogs_html';
 const finalOutputDirectory = '../html/blogs_html';
-const templateHtmlFile = '../html/single-blog-template.html';
+const templateHtmlFile = '../html/templates-html/single-blog-template.html';
 
 fs.readdirSync(markdownDirectory).forEach((file) => {
   if (file.endsWith('.md')) {

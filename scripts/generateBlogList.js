@@ -4,7 +4,7 @@ const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 
 const blogsHtmlDir = '../html/blogs_html';
-const templateHtmlFile = '../html/blogs-main-template.html';
+const templateHtmlFile = '../html/templates_html/blogs-main-template.html';
 const outputHtmlFile = '../html/blogs-main.html';
 
 function extractTitleFromHtml(htmlContent) {
