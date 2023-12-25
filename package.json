@@ -13,16 +13,16 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "marked": "11.0.0"
-  },
   "devDependencies": {
     "autoprefixer": "10.4.16",
+    "highlight.js": "^11.9.0",
     "jsdom": "23.0.1",
     "markdown-it": "^14.0.0",
     "markdown-it-anchor": "^8.6.7",
     "markdown-it-attrs": "^4.1.6",
     "markdown-it-expandable": "^1.0.2",
+    "markdown-it-highlightjs": "^4.0.1",
+    "markdown-it-ignore": "^0.1.0",
     "markdown-it-table-of-contents": "^0.6.0",
     "nodemon": "^3.0.2",
     "postcss": "8.4.32",
@@ -31,7 +31,8 @@
     "postcss-nested": "6.0.1",
     "postcss-scss": "4.0.9",
     "sass": "1.69.5",
-    "tailwindcss": "3.3.6"
+    "tailwindcss": "3.3.6",
+    "two-up-element": "^1.0.1"
   },
   "browserslist": [
     "> 2%"

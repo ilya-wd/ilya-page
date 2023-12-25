@@ -14,7 +14,8 @@ function extractTitleFromHtml(htmlContent) {
 }
 
 function generateBlogList() {
-  let htmlContent = '<ol class="list-decimal">\n';
+  // let htmlContent = '<ol class="list-of-posts">\n';
+  let htmlContent = '<ol>\n';
 
   fs.readdirSync(blogsHtmlDir).forEach((file) => {
     if (file.endsWith('.html')) {
@@ -22,7 +23,7 @@ function generateBlogList() {
       const fileContent = fs.readFileSync(filePath, 'utf8');
       const title = extractTitleFromHtml(fileContent);
 
-      htmlContent += `<li class="mb-2"><a href="${filePath}" class="text-blue-600 hover:text-blue-800">${title}</a></li>\n`;
+      htmlContent += `<li class="mb-2"><a href="${filePath}">${title}</a></li>\n`;
     }
   });
 
@@ -42,4 +43,5 @@ function generateBlogList() {
   }
 }
 
-generateBlogList();
+// generateBlogList();
+module.exports = generateBlogList;

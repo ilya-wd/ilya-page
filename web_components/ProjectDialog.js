@@ -21,21 +21,17 @@ class ProjectDialog extends HTMLElement {
     img.setAttribute('class', 'dialog-image');
 
     const title = document.createElement('p');
-    let titleContent;
+    let titleContent = titleText;
     if (projectLinkURL && projectLinkURL.length > 0) {
       titleContent = `<a href="${projectLinkURL}" target="_blank">${titleText}</a>`;
-    } else {
-      titleContent = titleText;
     }
     title.innerHTML = titleContent;
 
     const company = document.createElement('p');
     company.setAttribute('class', 'company');
-    let companyContent;
+    let companyContent = '@ ' + companyText;
     if (companyLinkURL && companyLinkURL.length > 0) {
       companyContent = `<a href="${companyLinkURL}" target="_blank">${companyText}</a>`;
-    } else {
-      companyContent = '@ ' + companyText;
     }
     company.innerHTML = companyContent;
 
@@ -124,7 +120,6 @@ class ProjectDialog extends HTMLElement {
             font-weight: 700;
             display: flex;
             flex-direction: row;
-            // justify-content: space-between;
             font-size: 1.5em;
             align-items: center;
           }

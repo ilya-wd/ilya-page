@@ -1,0 +1,68 @@
+[
+  {
+      "id": "csc-mscr",
+      "dialogId": "csc-mscr-dialog",
+      "title": "Metadata Schema and Crosswalk Registry (MSCR)",
+      "description": "A research tool to manage metadata schema and crosswalks, available in graphical user interface and as an API. Part of the FAIRCORE4EOSC project for the European Open Science Cloud.",
+      "dialogContent": "[\"Full stack developer trainee position \",\"Contributed to the broad range of activities: from writing documentaiton, tests and setting API endpoints to implementing GUI and configuring CI/CD pipelines\"]",
+      "image": "assets/project_images/mscr.jpg",
+      "company": "CSC - IT Center for Science",
+      "companyLink": "https://www.csc.fi/",
+      "projectLink": "https://faircore4eosc.eu/eosc-core-components/metadata-schema-and-crosswalk-registry-mscr",
+      "githubLink": "",
+      "techUsed": "[\"TypeScript\", \"Next.js\", \"React\", \"Java Spring Boot\", \"Apache Jena\", \"Git\", \"CI/CD\", \"Docker\", \"OpenShift\", \"Swagger\", \"Scrum\"]"
+  },
+  {
+      "id": "vr",
+      "dialogId": "vr-dialog",
+      "title": "VR Matkalla App (Feature)",
+      "description": "VR Matkalla is an app of the state owned railway company VR used by over 100 000 people every month. Our front end feature provides customers a personalized summary of their rail travel history over the past year to increase user engagement and brand loyalty.",
+      "dialogContent": "[\"Student developer in a 9-month-long project\", \"Designed and implemented a feature for the VR's mobile app from the ground up in close collaboration with VR.\", \"Delivered production-ready code conforming to the corporate standards including tests, accessiblity features, internationalization.\"]",
+      "image": "assets/project_images/vr-project.png",
+      "company": "VR | Aalto University",
+      "companyLink": "https://www.vr.fi/",
+      "projectLink": "https://apps.apple.com/fi/app/vr-matkalla/id1410647394",
+      "githubLink": "",
+      "techUsed": "[\"TypeScript\", \"React Native\", \"Detox\", \"Git\", \"Jest\", \"Jira\", \"Scrum\"]"
+  },
+  {
+      "id": "ilya-page",
+      "dialogId": "ilya-page-dialog",
+      "title": "Ilya's Page (you are here :)",
+      "description": "Personal website and blog",
+      "dialogContent": "[\"For a small and static website I wanted to only rely on HTML and CSS initially\", \"Then added JS scripts and Web Components for better maintainability\", \"Blogs are converted to HTML using markdown-it parser, HTML template and JS script\"]",
+      "image": "assets/project_images/ilya-page.png",
+      "company": "Personal project",
+      "companyLink": "",
+      "projectLink": "https://www.ilya.page",
+      "githubLink": "",
+      "techUsed": "[\"Vanilla JavaScript\", \"Web Components\", \"HTML\", \"CSS\", \"SCSS\", \"Tailwind CSS\", \"Node\"]"
+  },
+  {
+      "id": "reaktor-aalto",
+      "dialogId": "reaktor-aalto-dialog",
+      "title": "Biodiversty Dashboard",
+      "description": "An interactive dashboard visualizing Finnish biodiversity using publicly available observation data from laji.fi. Key users are high school teachers and students in Finnish schools.",
+      "dialogContent": "[\"Data science-heavy project\", \"Developed using consulting workflow\", \"Includes interactive maps and educational material\"]",
+      "image": "assets/project_images/biodiversity.png",
+      "company": "Reaktor | Aalto University",
+      "companyLink": "https://www.reaktor.com/",
+      "projectLink": "https://biodiversity.streamlit.app/",
+      "githubLink": "https://github.com/ilya-wd/DS-Project-2023-Group-2-Reaktor",
+      "techUsed": "[\"Python\", \"Pandas\", \"Plotly\", \"Streamlit\"]"
+  },
+  {
+      "id": "junction",
+      "dialogId": "junction-dialog",
+      "title": "MeMo (Junction 2023)",
+      "description": "Mobile app that deals with sedentary lifestyle among young children by cultivating healthy habits early in life.",
+      "dialogContent": "[\"First hackathon experience\", \"Developed over the course of two days\", \"Main feature is a competitive mode, with winning condition to jump faster\"]",
+      "image": "assets/project_images/junction.png",
+      "company": "Personal project",
+      "companyLink": "",
+      "projectLink": "https://github.com/ilya-wd/junction2023",
+      "githubLink": "https://github.com/ilya-wd/junction2023",
+      "techUsed": "[\"React Native\", \"Go\", \"Expo\"]"
+  }
+
+]

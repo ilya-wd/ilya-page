@@ -1,3 +1,5 @@
+@import 'highlight.js/styles/atom-one-dark.css';
+
 // MAIN STYLES
 body {
   background: rgb(237, 237, 237);
@@ -5,7 +7,6 @@ body {
 }
 
 .main-body {
-  // max-width: 45vw;
   max-width: 1000px;
   margin: 0 auto;
 }
@@ -69,71 +70,85 @@ a {
   overflow-y: auto;
   max-height: calc(100vh - 100px);
   border: #cdcccc 5px solid;
+  font-size: 0.8rem;
 }
 
 .blog-content {
   padding: 1rem;
-  color: #333;
-  font-family: 'Arial', sans-serif;
   line-height: 1.6; 
-  max-width: 80%;
-}
-
-.blog-content code {
-  white-space: pre-wrap; 
-  word-wrap: break-word; 
-  overflow-wrap: break-word; 
+  max-width: 70%;
+  font-size: 1.1rem;
 }
 
 .blog-content h1, h2, h3, h4, h5, h6 {
-  margin-top: 1em;
-  margin-bottom: 0.5em;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
   color: #222;
   font-weight: 700;
 }
 
 .blog-content h1 {
-  font-size: 2.5em;
+  font-size: 2.5rem;
 }
 
 .blog-content h2 {
-  font-size: 2em;
+  font-size: 2rem;
 }
 
 .blog-content h3 {
-  font-size: 1.5em;
+  font-size: 1.5rem;
 }
 
 .blog-content h4 {
-  font-size: 1.2em;
+  font-size: 1.2rem;
 } 
 
 .blog-content h5 {
-  font-size: 1em;
+  font-size: 1rem;
 }
 
 .blog-content p {
-  margin-bottom: 1em; 
+  margin-bottom: 1rem; 
 }
 
-code, pre {
-  background-color: #f5f5f5;  
-  color: rgb(255, 34, 123);
-  padding: 0.2em 0.4em; 
-  border-radius: 3px; 
+.blog-content li {
+  margin-left: 1rem; 
+  list-style-type: square;
 }
 
+.table-of-contents li li {
+  margin-left: 1rem; 
+}
+
+.demo {
+	background: #fff;
+	height: 200px;
+	width: 300px;
+	margin: 0 auto 50px;
+	display: flex;
+}
+two-up {
+	flex: 1;
+}
+.light, .dark {
+	text-align: center;
+	padding: 10px 0 0;
+}
+.dark {
+	background: #555;
+	color: #ccc;
+}
 pre {
   white-space: pre-wrap;
-  padding: 1em; 
+  padding: 1rem; 
   overflow-x: auto;
 }
 
 
 details summary {
   font-weight: 600;
-  font-size: 1.2em;
-  margin-bottom: 1em;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
   cursor: pointer;
 }
 
@@ -157,6 +172,58 @@ details p{
   } 
 }
 
+.blog-content blockquote {
+  padding: 1rem;
+  margin: 50px auto;
+  border: solid  2px;
+  box-shadow: 10px 10px 0 0 gray,
+              // 10px 10px 0 0  black,
+              // 10px 10px 0 0  black,
+              // 11px 15px 0 0  black;
+}
+
+
+#list-of-blogs {
+  // max-width: 1000px; 
+  margin: 0 auto; 
+  padding: 20px; 
+}
+
+#list-of-blogs ol {
+  list-style-type: decimal; 
+  padding-left: 20px; 
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+#list-of-blogs li {
+  margin-bottom: 10px; 
+  font-size: 1.5em; 
+  line-height: 1.6; 
+}
+
+#list-of-blogs a {
+  // color: #007bff; 
+  color: black; 
+  // text-decoration: underline; 
+  border-bottom: 1px solid black;
+  padding-bottom: 3px;
+}
+
+#list-of-blogs a:hover {
+  color: rgb(163, 31, 162); 
+}
+
+
+@media screen and (max-width: 768px) {
+  #list-of-blogs {
+      padding: 15px; 
+      max-width: 100%; 
+  }
+  #list-of-blogs ol {
+      padding-left: 15px;
+  }
+}
 
 
 

@@ -4,16 +4,20 @@
     <title>Ilya's page | Blog post</title>
     <link rel="stylesheet" href="../../dist/combined.css">
     <script src="../../web_components/Header.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark-dimmed.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/bash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/js.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script> -->
   </head>
   <body>
     <my-header></my-header>
 
     <div class="container mx-auto">
       <div class="grid-container">
-        <div id="toc-location" class="toc"><div class="table-of-contents"><ol><li><a href="#essentials">Essentials</a><ol><li><a href="#linux-namespace">Linux namespace</a></li><li><a href="#kernel-features-and-commands-that-make-up-containerization">Kernel features and commands that make up containerization</a><ol><li><a href="#pivot_root">pivot_root</a></li><li><a href="#unshare">Unshare</a></li><li><a href="#cgroups%3A-resource-limits">cgroups: resource limits</a></li></ol></li><li><a href="#containers-and-security">Containers and Security</a><ol><li><a href="#capabilities">Capabilities</a></li><li><a href="#seccomp-bpf---restricting-system-calls-your-processes-can-run">seccomp-bpf - restricting system calls your processes can run</a></li></ol></li></ol></li><li><a href="#container-runtimes">Container Runtimes</a><ol><li><a href="#container-runtimes%3A-introduction">Container Runtimes: Introduction</a><ol><li><a href="#runtime-and-containers">Runtime and containers</a></li><li><a href="#history-of-docker">History of Docker</a></li></ol></li><li><a href="#low-level-and-high-level-container-runtimes">Low-Level and High-Level Container Runtimes</a><ol><li><a href="#low-level-vs-high-level-description">Low-level vs high-level description</a></li><li><a href="#example-of-high-level-container-runtimes">Example of high-level container runtimes</a></li><li><a href="#why-high-level-runtimes-are-needed">Why high-level runtimes are needed</a></li><li><a href="#the-target-audience-of-low-level-runtimes-is-developers-of-higher-level-runtimes">The target audience of low-level runtimes is developers of higher-level runtimes</a></li></ol></li></ol></li><li><a href="#container-runtimes%3A-low-level-container-runtimes">Container Runtimes: Low-level Container Runtimes</a><ol><li><ol><li><a href="#recap-from-the-previous-part">Recap from the previous part</a></li><li><a href="#steps-to-create-a-%2Ftrivial%2F-container-runtimes">Steps to create a /trivial/ container runtimes</a></li></ol></li><li><a href="#building-a-sample-runtime-(example-by-ian-lewis)">Building a Sample Runtime (example by Ian Lewis)</a></li><li><a href="#examples-of-low-level-container-runtimes">Examples of Low-Level Container Runtimes</a><ol><li><a href="#runc-example-in-practice-(remember-it%E2%80%99s-low-level!)">runc example in practice (remember it’s low-level!)</a></li></ol></li></ol></li><li><a href="#container-runtimes%3A-high-level-runtimes">Container Runtimes: High-Level Runtimes</a><ol><li><ol><li><a href="#description-of-high-level-runtimes">Description of high-level runtimes</a></li></ol></li><li><a href="#docker-container-runtime">Docker container runtime</a><ol><li><a href="#how-docker%E2%80%99s-components-dockerd%2C-containerd-and-run-are-interconnected-%E2%80%93-dockerd">How Docker’s components dockerd, containerd and run are interconnected – dockerd</a></li></ol></li><li><a href="#containerd-runtime">containerd runtime</a></li><li><a href="#rkt-high-level-runtime">rkt high-level runtime</a></li></ol></li><li><a href="#references">References</a></li></ol></div></div>
-        <div id="blog-content" class="blog-content"><p></p><div class="table-of-contents"><ol><li><a href="#essentials">Essentials</a><ol><li><a href="#linux-namespace">Linux namespace</a></li><li><a href="#kernel-features-and-commands-that-make-up-containerization">Kernel features and commands that make up containerization</a><ol><li><a href="#pivot_root">pivot_root</a></li><li><a href="#unshare">Unshare</a></li><li><a href="#cgroups%3A-resource-limits">cgroups: resource limits</a></li></ol></li><li><a href="#containers-and-security">Containers and Security</a><ol><li><a href="#capabilities">Capabilities</a></li><li><a href="#seccomp-bpf---restricting-system-calls-your-processes-can-run">seccomp-bpf - restricting system calls your processes can run</a></li></ol></li></ol></li><li><a href="#container-runtimes">Container Runtimes</a><ol><li><a href="#container-runtimes%3A-introduction">Container Runtimes: Introduction</a><ol><li><a href="#runtime-and-containers">Runtime and containers</a></li><li><a href="#history-of-docker">History of Docker</a></li></ol></li><li><a href="#low-level-and-high-level-container-runtimes">Low-Level and High-Level Container Runtimes</a><ol><li><a href="#low-level-vs-high-level-description">Low-level vs high-level description</a></li><li><a href="#example-of-high-level-container-runtimes">Example of high-level container runtimes</a></li><li><a href="#why-high-level-runtimes-are-needed">Why high-level runtimes are needed</a></li><li><a href="#the-target-audience-of-low-level-runtimes-is-developers-of-higher-level-runtimes">The target audience of low-level runtimes is developers of higher-level runtimes</a></li></ol></li></ol></li><li><a href="#container-runtimes%3A-low-level-container-runtimes">Container Runtimes: Low-level Container Runtimes</a><ol><li><ol><li><a href="#recap-from-the-previous-part">Recap from the previous part</a></li><li><a href="#steps-to-create-a-%2Ftrivial%2F-container-runtimes">Steps to create a /trivial/ container runtimes</a></li></ol></li><li><a href="#building-a-sample-runtime-(example-by-ian-lewis)">Building a Sample Runtime (example by Ian Lewis)</a></li><li><a href="#examples-of-low-level-container-runtimes">Examples of Low-Level Container Runtimes</a><ol><li><a href="#runc-example-in-practice-(remember-it%E2%80%99s-low-level!)">runc example in practice (remember it’s low-level!)</a></li></ol></li></ol></li><li><a href="#container-runtimes%3A-high-level-runtimes">Container Runtimes: High-Level Runtimes</a><ol><li><ol><li><a href="#description-of-high-level-runtimes">Description of high-level runtimes</a></li></ol></li><li><a href="#docker-container-runtime">Docker container runtime</a><ol><li><a href="#how-docker%E2%80%99s-components-dockerd%2C-containerd-and-run-are-interconnected-%E2%80%93-dockerd">How Docker’s components dockerd, containerd and run are interconnected – dockerd</a></li></ol></li><li><a href="#containerd-runtime">containerd runtime</a></li><li><a href="#rkt-high-level-runtime">rkt high-level runtime</a></li></ol></li><li><a href="#references">References</a></li></ol></div><p></p>
-<h1 id="essentials" tabindex="-1">Essentials</h1>
-<p><strong>Containers in a nutshell:</strong></p>
+        <div id="toc-location" class="toc"><div class="table-of-contents"><ol><li><a href="#containers-beyond-docker-run">Containers Beyond docker run</a><ol><li><a href="#containers-in-a-nutshell%3A">Containers in a nutshell:</a></li><li><a href="#linux-namespace">Linux namespace</a></li><li><a href="#kernel-features-and-commands-that-make-up-containerization">Kernel features and commands that make up containerization</a><ol><li><a href="#pivot_root">pivot_root</a></li><li><a href="#unshare">Unshare</a></li><li><a href="#cgroups%3A-resource-limits">cgroups: resource limits</a></li></ol></li><li><a href="#containers-and-security">Containers and Security</a><ol><li><a href="#capabilities">Capabilities</a></li><li><a href="#seccomp-bpf---restricting-system-calls-your-processes-can-run">seccomp-bpf - restricting system calls your processes can run</a></li></ol></li></ol></li><li><a href="#container-runtimes">Container Runtimes</a><ol><li><a href="#container-runtimes%3A-introduction">Container Runtimes: Introduction</a><ol><li><a href="#runtime-and-containers">Runtime and containers</a></li><li><a href="#history-of-docker">History of Docker</a></li></ol></li><li><a href="#low-level-and-high-level-container-runtimes">Low-Level and High-Level Container Runtimes</a><ol><li><a href="#low-level-vs-high-level-description">Low-level vs high-level description</a></li><li><a href="#example-of-high-level-container-runtimes">Example of high-level container runtimes</a></li><li><a href="#why-high-level-runtimes-are-needed">Why high-level runtimes are needed</a></li><li><a href="#the-target-audience-of-low-level-runtimes-is-developers-of-higher-level-runtimes">The target audience of low-level runtimes is developers of higher-level runtimes</a></li></ol></li></ol></li><li><a href="#container-runtimes%3A-low-level-container-runtimes">Container Runtimes: Low-level Container Runtimes</a><ol><li><ol><li><a href="#recap-from-the-previous-part">Recap from the previous part</a></li><li><a href="#steps-to-create-a-%2Ftrivial%2F-container-runtimes">Steps to create a /trivial/ container runtimes</a></li></ol></li><li><a href="#building-a-sample-runtime-(example-by-ian-lewis)">Building a Sample Runtime (example by Ian Lewis)</a></li><li><a href="#examples-of-low-level-container-runtimes">Examples of Low-Level Container Runtimes</a><ol><li><a href="#runc-example-in-practice-(remember-it%E2%80%99s-low-level!)">runc example in practice (remember it’s low-level!)</a></li></ol></li></ol></li><li><a href="#container-runtimes%3A-high-level-runtimes">Container Runtimes: High-Level Runtimes</a><ol><li><ol><li><a href="#description-of-high-level-runtimes">Description of high-level runtimes</a></li></ol></li><li><a href="#docker-container-runtime">Docker container runtime</a><ol><li><a href="#how-docker%E2%80%99s-components-dockerd%2C-containerd-and-run-are-interconnected-%E2%80%93-dockerd">How Docker’s components dockerd, containerd and run are interconnected – dockerd</a></li></ol></li><li><a href="#containerd-runtime">containerd runtime</a></li><li><a href="#rkt-high-level-runtime">rkt high-level runtime</a></li></ol></li><li><a href="#references">References</a></li></ol></div></div>
+        <div id="blog-content" class="blog-content"><p></p><div class="table-of-contents"><ol><li><a href="#containers-beyond-docker-run">Containers Beyond docker run</a><ol><li><a href="#containers-in-a-nutshell%3A">Containers in a nutshell:</a></li><li><a href="#linux-namespace">Linux namespace</a></li><li><a href="#kernel-features-and-commands-that-make-up-containerization">Kernel features and commands that make up containerization</a><ol><li><a href="#pivot_root">pivot_root</a></li><li><a href="#unshare">Unshare</a></li><li><a href="#cgroups%3A-resource-limits">cgroups: resource limits</a></li></ol></li><li><a href="#containers-and-security">Containers and Security</a><ol><li><a href="#capabilities">Capabilities</a></li><li><a href="#seccomp-bpf---restricting-system-calls-your-processes-can-run">seccomp-bpf - restricting system calls your processes can run</a></li></ol></li></ol></li><li><a href="#container-runtimes">Container Runtimes</a><ol><li><a href="#container-runtimes%3A-introduction">Container Runtimes: Introduction</a><ol><li><a href="#runtime-and-containers">Runtime and containers</a></li><li><a href="#history-of-docker">History of Docker</a></li></ol></li><li><a href="#low-level-and-high-level-container-runtimes">Low-Level and High-Level Container Runtimes</a><ol><li><a href="#low-level-vs-high-level-description">Low-level vs high-level description</a></li><li><a href="#example-of-high-level-container-runtimes">Example of high-level container runtimes</a></li><li><a href="#why-high-level-runtimes-are-needed">Why high-level runtimes are needed</a></li><li><a href="#the-target-audience-of-low-level-runtimes-is-developers-of-higher-level-runtimes">The target audience of low-level runtimes is developers of higher-level runtimes</a></li></ol></li></ol></li><li><a href="#container-runtimes%3A-low-level-container-runtimes">Container Runtimes: Low-level Container Runtimes</a><ol><li><ol><li><a href="#recap-from-the-previous-part">Recap from the previous part</a></li><li><a href="#steps-to-create-a-%2Ftrivial%2F-container-runtimes">Steps to create a /trivial/ container runtimes</a></li></ol></li><li><a href="#building-a-sample-runtime-(example-by-ian-lewis)">Building a Sample Runtime (example by Ian Lewis)</a></li><li><a href="#examples-of-low-level-container-runtimes">Examples of Low-Level Container Runtimes</a><ol><li><a href="#runc-example-in-practice-(remember-it%E2%80%99s-low-level!)">runc example in practice (remember it’s low-level!)</a></li></ol></li></ol></li><li><a href="#container-runtimes%3A-high-level-runtimes">Container Runtimes: High-Level Runtimes</a><ol><li><ol><li><a href="#description-of-high-level-runtimes">Description of high-level runtimes</a></li></ol></li><li><a href="#docker-container-runtime">Docker container runtime</a><ol><li><a href="#how-docker%E2%80%99s-components-dockerd%2C-containerd-and-run-are-interconnected-%E2%80%93-dockerd">How Docker’s components dockerd, containerd and run are interconnected – dockerd</a></li></ol></li><li><a href="#containerd-runtime">containerd runtime</a></li><li><a href="#rkt-high-level-runtime">rkt high-level runtime</a></li></ol></li><li><a href="#references">References</a></li></ol></div><p></p>
+<h1 id="containers-beyond-docker-run" tabindex="-1">Containers Beyond <code class="hljs">docker <span class="hljs-built_in">run</span></code></h1>
+<h2 id="containers-in-a-nutshell%3A" tabindex="-1">Containers in a nutshell:</h2>
 <p>The word “container” doesn’t really mean anything that precise. Basically, there are a few Linux kernel features (“<strong>namespaces</strong>” and “<strong>cgroups</strong>”) that let you <strong>isolate processes from each other</strong>. When you use those features, you call them “containers”. That's it – the basis for a container is isolation.</p>
 <p>These features let you pretend you have something like a virtual machine, except it’s not a virtual machine at all, it’s just processes running in the same Linux kernel.</p>
 <p><strong>Namespaces</strong> let you virtualize system resources, like the file system or networking, for each container. <strong>Cgroups</strong> provide a way to <em>limit the amount of resources</em> like CPU and memory that each container can use. As we will see below, there are many more Kernel features in making your everyday container run, but these two are essential.</p>
@@ -39,25 +43,24 @@
 </ul>
 <h2 id="kernel-features-and-commands-that-make-up-containerization" tabindex="-1">Kernel features and commands that make up containerization</h2>
 <h3 id="pivot_root" tabindex="-1">pivot_root</h3>
-<p><a href="(https://www.man7.org/linux/man-pages/man2/pivot_root.2.html)">pivot_root()</a> changes the root mount in the mount namespace of the calling process. More precisely, it moves the root mount to the directory <code>put_old</code> and makes <code>new_root</code> the new root mount.</p>
-<p>Unmounting a system?</p>
+<p><a href="(https://www.man7.org/linux/man-pages/man2/pivot_root.2.html)">pivot_root()</a> changes the root mount in the mount namespace of the calling process. More precisely, it moves the root mount to the directory <code class="hljs"><span class="hljs-attribute">put_old</span></code> and makes <code class="hljs"><span class="hljs-keyword">new</span><span class="hljs-number">_</span>root</code> the new root mount.</p>
 <h4 id="chroot" tabindex="-1">chroot</h4>
-<p>Similar to <code>pivot_root</code> in a sense. It changes the root <strong>directory of the process</strong>, as opposed to the <strong>root filesystem</strong>.</p>
+<p>Similar to <code class="hljs"><span class="hljs-attribute">pivot_root</span></code> in a sense. It changes the root <strong>directory of the process</strong>, as opposed to the <strong>root filesystem</strong>.</p>
 <p>The root directory is one of the folders that reside at the top of your filesystem’s hierarchy. other top-level directories can include e.g. /bin for binary executables that are needed for the system to boot and run, or /tmp, which serves as a storage for temporary files</p>
 <p>The Root filesystem, on the other hand, contains all the files and directories of the entire file system.</p>
-<p>In that regard, a process can seem isolated with <code>chroot</code>, but a simple <code>cd ..</code> will escape the “isolation”. What pivot_root does for containerization is isolation of the process and independent filesystem for a container.</p>
+<p>In that regard, a process can seem isolated with <code class="hljs"><span class="hljs-built_in">chroot</span></code>, but a simple <code class="hljs"><span class="hljs-function"><span class="hljs-title">cd</span></span> ..</code> will escape the “isolation”. What pivot_root does for containerization is isolation of the process and independent filesystem for a container.</p>
 <h3 id="unshare" tabindex="-1">Unshare</h3>
-<p>Processes use their parent’s namespaces by default when created with <code>clone</code>. That’s where you need <code>unshare</code> which creates a new <strong>namespace</strong> (<code>clone</code> is still useful in the container’s world: for example, you can create a new namespace for a child process).</p>
-<p><code>$ sudo unshare --fork --pid --mount-proc bash</code> - making a new PID and running bash in it</p>
+<p>Processes use their parent’s namespaces by default when created with <code class="hljs"><span class="hljs-built_in">clone</span></code>. That’s where you need <code class="hljs"><span class="hljs-attribute">unshare</span></code> which creates a new <strong>namespace</strong> (<code class="hljs"><span class="hljs-built_in">clone</span></code> is still useful in the container’s world: for example, you can create a new namespace for a child process).</p>
+<p><code class="hljs"><span class="hljs-comment">$ sudo unshare</span> <span class="hljs-literal">--</span><span class="hljs-comment">fork</span> <span class="hljs-literal">--</span><span class="hljs-comment">pid</span> <span class="hljs-literal">--</span><span class="hljs-comment">mount</span><span class="hljs-literal">-</span><span class="hljs-comment">proc bash</span></code> - making a new PID and running bash in it</p>
 <ul class="lvl-0">
 <li class="lvl-2">
-<p><code>fork</code>: makes the <code>unshare</code> fork and runs the specified command eg <code>bash</code> in the child process</p>
+<p><code class="hljs"><span class="hljs-attribute">fork</span></code>: makes the <code class="hljs"><span class="hljs-attribute">unshare</span></code> fork and runs the specified command eg <code class="hljs"><span class="hljs-attribute">bash</span></code> in the child process</p>
 </li>
 <li class="lvl-2">
-<p><code>pid</code>: unshared the PID, so that the <strong>new</strong> bash session won’t see processes from the parent environment</p>
+<p><code class="hljs"><span class="hljs-attribute">pid</span></code>: unshared the PID, so that the <strong>new</strong> bash session won’t see processes from the parent environment</p>
 </li>
 <li class="lvl-2">
-<p><code>mount-proc</code>: mounts the /proc filesystem afresh in the new namespace</p>
+<p><code class="hljs"><span class="hljs-symbol">mount</span>-<span class="hljs-meta">proc</span></code>: mounts the /proc filesystem afresh in the new namespace</p>
 </li>
 <li class="lvl-2">
 <p>bash: the program that will be run in the new set of namespaces</p>
@@ -66,50 +69,50 @@
 <p>You are launching a new bash session that <strong>has an isolated process space</strong>. Inside this session, you will not see processes from the parent or other namespaces. This can be useful for sandboxing, testing, and other situations where you want an isolated environment without the overhead of a <strong>full virtual machine or container.</strong></p>
 <h4 id="unshare-example-by-julia-evans%3A" tabindex="-1">Unshare example by Julia Evans:</h4>
 <p>Jula makes a new PID namespace and runs bash using the command above:</p>
-<p><code>sudo unshare --fork --pid --mount-proc bash</code></p>
+<p><code class="hljs"><span class="hljs-comment">sudo unshare</span> <span class="hljs-literal">--</span><span class="hljs-comment">fork</span> <span class="hljs-literal">--</span><span class="hljs-comment">pid</span> <span class="hljs-literal">--</span><span class="hljs-comment">mount</span><span class="hljs-literal">-</span><span class="hljs-comment">proc bash</span></code></p>
 <p>Then she inspects it, and discovers that only 2 processes are running in that new namespace:</p>
-<pre><code>root@kiwi:~# ps aux
+<pre><code class="hljs"><span class="hljs-attribute">root</span>@kiwi:~# ps aux
 
-USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND
+<span class="hljs-attribute">USER</span> PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND
 
-root 1 0.0 0.0 28372 4148 pts/6 S 23:01 0:00 bash
+<span class="hljs-attribute">root</span> <span class="hljs-number">1</span> <span class="hljs-number">0</span>.<span class="hljs-number">0</span> <span class="hljs-number">0</span>.<span class="hljs-number">0</span> <span class="hljs-number">28372</span> <span class="hljs-number">4148</span> pts/<span class="hljs-number">6</span> S <span class="hljs-number">23</span>:<span class="hljs-number">01</span> <span class="hljs-number">0</span>:<span class="hljs-number">00</span> bash
 
-root 2 0.0 0.0 44432 3836 pts/6 R+ 23:01 0:00 ps aux
+<span class="hljs-attribute">root</span> <span class="hljs-number">2</span> <span class="hljs-number">0</span>.<span class="hljs-number">0</span> <span class="hljs-number">0</span>.<span class="hljs-number">0</span> <span class="hljs-number">44432</span> <span class="hljs-number">3836</span> pts/<span class="hljs-number">6</span> R+ <span class="hljs-number">23</span>:<span class="hljs-number">01</span> <span class="hljs-number">0</span>:<span class="hljs-number">00</span> ps aux
 </code></pre>
 <p>You can also see the same processes (with e.g. PID 1 or 2 above) from the regular PID namespace (they will have different identifiers), but not vice versa: your regular processes are not available in that newly created namespace</p>
 <h4 id="nsenter-and-entering-another-program%E2%80%99s-namespace" tabindex="-1">nsenter and entering another program’s namespace</h4>
-<p>As a side note, you can enter the namespace of another running program! You do this with a command called <code>nsenter</code>.</p>
+<p>As a side note, you can enter the namespace of another running program! You do this with a command called <code class="hljs"><span class="hljs-attribute">nsenter</span></code>.</p>
 <h3 id="cgroups%3A-resource-limits" tabindex="-1">cgroups: resource limits</h3>
-<p><code>nice</code> <strong>command</strong> in Linux helps in the execution of a program/process with modified scheduling priority. It launches a process with a user-defined scheduling priority.</p>
-<p><code>cgroups</code> are like when you <code>nice</code> a process but with a bunch more features</p>
-<p><code>sudo cgcreate -a bork -g memory:mycoolgroup</code></p>
+<p><code class="hljs"><span class="hljs-built_in">nice</span></code> <strong>command</strong> in Linux helps in the execution of a program/process with modified scheduling priority. It launches a process with a user-defined scheduling priority.</p>
+<p><code class="hljs"><span class="hljs-attribute">cgroups</span></code> are like when you <code class="hljs"><span class="hljs-built_in">nice</span></code> a process but with a bunch more features</p>
+<p><code class="hljs">sudo cgcreate -<span class="hljs-selector-tag">a</span> bork -g memory:mycoolgroup</code></p>
 <ul class="lvl-0">
 <li class="lvl-2">
-<p>-<strong><code>a bork</code></strong>: The <code>a</code> option specifies the owner of the cgroup's control files in the format <code>user:group</code>. In this case, you're setting the owner to the user named <code>bork</code>. This means that the user <code>bork</code> will have permission to modify the settings and parameters of the cgroup after it's created.</p>
+<p><strong><code class="hljs"><span class="hljs-selector-tag">a</span> bork</code></strong>: The <code class="hljs"><span class="hljs-selector-tag">a</span></code> option specifies the owner of the cgroup's control files in the format <code class="hljs"><span class="hljs-keyword">user</span>:<span class="hljs-keyword">group</span></code>. In this case, you're setting the owner to the user named <code class="hljs"><span class="hljs-attribute">bork</span></code>. This means that the user <code class="hljs"><span class="hljs-attribute">bork</span></code> will have permission to modify the settings and parameters of the cgroup after it's created.</p>
 </li>
 <li class="lvl-2">
-<p>-<strong><code>g memory:mycoolgroup</code></strong>: The <code>g</code> option defines which subsystems the new cgroup will be part of and gives a name to the cgroup. Here, you're creating a cgroup under the <code>memory</code> subsystem and naming it <code>mycoolgroup</code>.</p>
+<p><strong><code class="hljs">g <span class="hljs-keyword">memory</span>:mycoolgroup</code></strong>: The <code class="hljs"><span class="hljs-attribute">g</span></code> option defines which subsystems the new cgroup will be part of and gives a name to the cgroup. Here, you're creating a cgroup under the <code class="hljs"><span class="hljs-attribute">memory</span></code> subsystem and naming it <code class="hljs"><span class="hljs-attribute">mycoolgroup</span></code>.</p>
 </li>
 </ul>
 <h4 id="example-by-julia-evans%3A" tabindex="-1">Example by Julia Evans:</h4>
 <p>Julia runs:</p>
-<pre><code>$ sudo cgcreate -a bork -g memory:mycoolgrou
+<pre><code class="hljs language-bash">$ sudo cgcreate -a bork -g memory:mycoolgrou
 </code></pre>
 <p>And inside:</p>
-<pre><code>$ ls -l /sys/fs/cgroup/memory/mycoolgroup/
+<pre><code class="hljs language-bash">$ <span class="hljs-built_in">ls</span> -l /sys/fs/cgroup/memory/mycoolgroup/
 
 -rw-r--r-- 1 bork root 0 Okt 10 23:16 memory.kmem.limit_in_bytes
 
 -rw-r--r-- 1 bork root 0 Okt 10 23:14 memory.kmem.max_usage_in_bytes
 </code></pre>
 <p>Adding 10 megabytes:</p>
-<pre><code>$ sudo echo 10000000 &gt; /sys/fs/cgroup/memory/mycoolgroup/memory.limit_in_bytes
+<pre><code class="hljs language-bash">$ sudo <span class="hljs-built_in">echo</span> 10000000 &gt; /sys/fs/cgroup/memory/mycoolgroup/memory.limit_in_bytes
 </code></pre>
 <p>Now to use the cgroup:</p>
-<pre><code>$ sudo cgexec -g memory:mycoolgroup bash
+<pre><code class="hljs language-bash">$ sudo cgexec -g memory:mycoolgroup bash
 </code></pre>
 <p>When trying to compile a Rust program we get an error:</p>
-<pre><code>$ root@kiwi:~/work/ruby-stacktrace# cargo build
+<pre><code class="hljs language-bash">$ root@kiwi:~/work/ruby-stacktrace<span class="hljs-comment"># cargo build</span>
 
 error: Could not execute process `rustc -vV` (never executed)
 Caused by:
@@ -117,7 +120,7 @@ Cannot allocate memory (os error 12)
 </code></pre>
 <h2 id="containers-and-security" tabindex="-1">Containers and Security</h2>
 <h3 id="capabilities" tabindex="-1">Capabilities</h3>
-<p>Each process has capabilities that define what it can do in your system. Capabilities are predefined and vary greatly in the powers they grant to processes. For example, <code>CAP_SYS_ADMIN</code> is considered one of the most powerful capabilities and allows system administration operations, whereas <code>CAP_NET_ADMIN</code> ”only” grants access to network configuration and management.</p>
+<p>Each process has capabilities that define what it can do in your system. Capabilities are predefined and vary greatly in the powers they grant to processes. For example, <code class="hljs"><span class="hljs-attribute">CAP_SYS_ADMIN</span></code> is considered one of the most powerful capabilities and allows system administration operations, whereas <code class="hljs"><span class="hljs-attribute">CAP_NET_ADMIN</span></code> ”only” grants access to network configuration and management.</p>
 <h3 id="seccomp-bpf---restricting-system-calls-your-processes-can-run" tabindex="-1">seccomp-bpf - restricting system calls your processes can run</h3>
 <p>If you’re isolating your processes, you might in addition to restricting their memory and CPU usage, want to restrict what system calls they can run. Like, “no network access for you!”.</p>
 <p>This brings us to <a href="https://en.wikipedia.org/wiki/Seccomp">seccomp-bpf</a>, a Linux kernel feature that lets you filter which system calls your process can run.</p>
@@ -209,41 +212,41 @@ Cannot allocate memory (os error 12)
 <h2 id="building-a-sample-runtime-(example-by-ian-lewis)" tabindex="-1">Building a Sample Runtime (example by Ian Lewis)</h2>
 <p>We can perform the steps using the standard Linux <a href="https://linux.die.net/man/1/cgcreate">cgcreate</a>, <a href="https://linux.die.net/man/1/cgset">cgset</a>, <a href="https://linux.die.net/man/1/cgexec">cgexec</a>, <a href="http://man7.org/linux/man-pages/man2/chroot.2.html">chroot</a> and <a href="http://man7.org/linux/man-pages/man1/unshare.1.html">unshare</a> commands</p>
 <p>We’ll use the busybox Docker container as our base. Here we create a temporary directory and extract busybox into it</p>
-<pre><code>$ CID=$(docker create busybox)
+<pre><code class="hljs language-bash">$ CID=$(docker create busybox)
 
-$ ROOTFS=$(mktemp -d)
+$ ROOTFS=$(<span class="hljs-built_in">mktemp</span> -d)
 
-$ docker export $CID | tar -xf - -C $ROOTFS
+$ docker <span class="hljs-built_in">export</span> <span class="hljs-variable">$CID</span> | tar -xf - -C <span class="hljs-variable">$ROOTFS</span>
 </code></pre>
 <p>Now let’s create our cgroup and set restrictions on the memory and CPU. Memory limits are set in bytes. Here we are setting the limit to 100MB.</p>
-<pre><code>$ UUID=$(uuidgen)
+<pre><code class="hljs language-bash">$ UUID=$(uuidgen)
 
-$ cgcreate -g cpu,memory:$UUID
+$ cgcreate -g cpu,memory:<span class="hljs-variable">$UUID</span>
 
-$ cgset -r memory.limit_in_bytes=100000000 $UUID
+$ cgset -r memory.limit_in_bytes=100000000 <span class="hljs-variable">$UUID</span>
 
-$ cgset -r cpu.shares=512 $UUID
+$ cgset -r cpu.shares=512 <span class="hljs-variable">$UUID</span>
 </code></pre>
 <p><strong>CPU usage can be restricted in one of two ways. Here we set our CPU limit using CPU “shares”.</strong> Shares are an amount of CPU time relative to other processes running at the same time. Containers running by themselves can use the whole CPU, but if other containers are running, they can use a proportional amount of CPU to their CPU shares</p>
 <p><strong>CPU limits based on CPU cores are a bit more complicated.</strong></p>
 <p>Next we can execute a command in the container</p>
-<pre><code>$ cgexec -g cpu,memory:$UUID \
+<pre><code class="hljs language-bash">$ cgexec -g cpu,memory:<span class="hljs-variable">$UUID</span> \
 
 &gt; unshare -uinpUrf --mount-proc \
 
-&gt; sh -c "/bin/hostname $UUID &amp;&amp; chroot $ROOTFS /bin/sh"
+&gt; sh -c <span class="hljs-string">"/bin/hostname <span class="hljs-variable">$UUID</span> &amp;&amp; chroot <span class="hljs-variable">$ROOTFS</span> /bin/sh"</span>
 
-/ # echo "Hello from in a container"
+ <span class="hljs-comment"># echo "Hello from in a container"</span>
 
-Hello from in a container
+Hello from <span class="hljs-keyword">in</span> a container
 
-/ # exit`
+ <span class="hljs-comment"># exit`</span>
 
-Finally, after our command has completed, we can clean up by deleting the cgroup and temporary directory that we created.
+ <span class="hljs-comment"># Finally, after our command has completed, we can clean up by deleting the cgroup and temporary directory that we created.</span>
 
-`$ cgdelete -r -g cpu,memory:$UUID
+`$ cgdelete -r -g cpu,memory:<span class="hljs-variable">$UUID</span>
 
-$ rm -r $ROOTFS
+$ <span class="hljs-built_in">rm</span> -r <span class="hljs-variable">$ROOTFS</span>
 </code></pre>
 <h2 id="examples-of-low-level-container-runtimes" tabindex="-1"><strong>Examples of Low-Level Container Runtimes</strong></h2>
 <ul class="lvl-0">
@@ -259,96 +262,96 @@ $ rm -r $ROOTFS
 </ul>
 <h3 id="runc-example-in-practice-(remember-it%E2%80%99s-low-level!)" tabindex="-1">runc example in practice (remember it’s low-level!)</h3>
 <p>First create the root filesystem. Here we’ll use busybox again.</p>
-<pre><code>` $ mkdir rootfs
+<pre><code class="hljs language-bash">$ <span class="hljs-built_in">mkdir</span> rootfs
 
-$ docker export $(docker create busybox) | tar -xf - -C rootfs`
-
-Next create a config.json file.
-
-`$ runc spec`
-
-This command creates a template config.json for our container. It should look something like this:
-
-`$ cat config.json
+$ docker <span class="hljs-built_in">export</span> $(docker create busybox) | tar -xf - -C rootfs
+</code></pre>
+<p>Next create a config.json file.</p>
+<p><code class="hljs">$ runc <span class="hljs-keyword">spec</span></code></p>
+<p>This command creates a template config.json for our container. It should look something like this:</p>
+<pre><code class="hljs language-bash">`$ <span class="hljs-built_in">cat</span> config.json
 
 {
 
-"ociVersion": "1.0.0",
+<span class="hljs-string">"ociVersion"</span>: <span class="hljs-string">"1.0.0"</span>,
 
-"process": {
+<span class="hljs-string">"process"</span>: {
 
-"terminal": true,
+<span class="hljs-string">"terminal"</span>: <span class="hljs-literal">true</span>,
 
-"user": {
+<span class="hljs-string">"user"</span>: {
 
-"uid": 0,
+<span class="hljs-string">"uid"</span>: 0,
 
-"gid": 0
+<span class="hljs-string">"gid"</span>: 0
 
 },
 
-"args": [
+<span class="hljs-string">"args"</span>: [
 
-"sh"
-
-],
-
-"env": [
-
-"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
-
-"TERM=xterm"
+<span class="hljs-string">"sh"</span>
 
 ],
 
-"cwd": "/",
+<span class="hljs-string">"env"</span>: [
 
-"capabilities": {
+<span class="hljs-string">"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"</span>,
+
+<span class="hljs-string">"TERM=xterm"</span>
+
+],
+
+<span class="hljs-string">"cwd"</span>: <span class="hljs-string">"/"</span>,
+
+<span class="hljs-string">"capabilities"</span>: {
 
 ...
 </code></pre>
 <p>By default it runs the sh command in a container with a root filesystem at ./rootfs. Since that’s exactly the setup we want we can just go ahead and run the container.</p>
-<p>`$ sudo runc run mycontainerid</p>
-<p>/ # echo "Hello from in a container"</p>
-<p>Hello from in a container`</p>
+<pre><code class="hljs language-bash">`$ sudo runc run mycontainerid
+
+/ <span class="hljs-comment"># echo "Hello from in a container"</span>
+
+Hello from <span class="hljs-keyword">in</span> a container`
+</code></pre>
 <h1 id="container-runtimes%3A-high-level-runtimes" tabindex="-1">Container Runtimes: High-Level Runtimes</h1>
 <h3 id="description-of-high-level-runtimes" tabindex="-1">Description of high-level runtimes</h3>
 <p>High-level runtimes are higher up the stack than low-level runtimes. While low-level runtimes are responsible for the mechanics of actually running a container, high-level runtimes are responsible for the <strong>transport</strong> and <strong>management</strong> of <strong>container</strong> <strong>images</strong>, <strong>unpacking</strong> the <strong>image</strong>, and <strong>passing</strong> <strong>off</strong> to the <strong>low-level runtime to run the container</strong>. Typically, high-level runtimes provide a daemon application and an API that remote applications can use to logically run containers and monitor them but they sit on top of and delegate to low-level runtimes or other high-level runtimes for the actual work</p>
 <p>High-level runtimes can also provide features that sound low-level but are used <strong>across individual containers on a machine</strong>. For example, one feature might be the management of network namespaces, and allowing containers to join another container’s network namespace</p>
 <h2 id="docker-container-runtime" tabindex="-1">Docker container runtime</h2>
 <p>It was developed by the platform-as-a-service company dotCloud, and was used to run their users’ web applications in containers.</p>
-<p>Docker is a container runtime that incorporates building, packaging, sharing, and running containers. Docker has a client/server architecture and was originally built as a monolithic daemon, <code>dockerd</code>, and the <code>docker</code> client application. The daemon provided most of the logic of building containers, managing the images, and running containers, along with an API. <strong>The command line client could be run to send commands and to get information from the daemon</strong>.</p>
-<p>Docker originally implemented both high-level and low-level runtime features, but those pieces have since been broken out into separate projects as runc and containerd. Docker now consists of the <code>dockerd</code> daemon, and the <code>docker-containerd</code> daemon along with <code>docker-runc</code>. <code>docker-containerd</code> and <code>docker-runc</code> are just Docker packaged versions of vanilla <code>containerd</code> and <code>runc</code>.</p>
+<p>Docker is a container runtime that incorporates building, packaging, sharing, and running containers. Docker has a client/server architecture and was originally built as a monolithic daemon, <code class="hljs"><span class="hljs-attribute">dockerd</span></code>, and the <code class="hljs"><span class="hljs-attribute">docker</span></code> client application. The daemon provided most of the logic of building containers, managing the images, and running containers, along with an API. <strong>The command line client could be run to send commands and to get information from the daemon</strong>.</p>
+<p>Docker originally implemented both high-level and low-level runtime features, but those pieces have since been broken out into separate projects as runc and containerd. Docker now consists of the <code class="hljs"><span class="hljs-attribute">dockerd</span></code> daemon, and the <code class="hljs"><span class="hljs-attribute">docker-containerd</span></code> daemon along with <code class="hljs"><span class="hljs-attribute">docker-runc</span></code>. <code class="hljs"><span class="hljs-attribute">docker-containerd</span></code> and <code class="hljs"><span class="hljs-attribute">docker-runc</span></code> are just Docker packaged versions of vanilla <code class="hljs"><span class="hljs-attribute">containerd</span></code> and <code class="hljs"><span class="hljs-attribute">runc</span></code>.</p>
 <h3 id="how-docker%E2%80%99s-components-dockerd%2C-containerd-and-run-are-interconnected-%E2%80%93-dockerd" tabindex="-1">How Docker’s components dockerd, containerd and run are interconnected – dockerd</h3>
 <blockquote>
-<p>The <code>dockerd</code> daemon is the persistent background process that manages Docker containers and handles the container management tasks on a host system.</p>
+<p>The <code class="hljs"><span class="hljs-attribute">dockerd</span></code> daemon is the persistent background process that manages Docker containers and handles the container management tasks on a host system.</p>
 </blockquote>
-<p><code>dockerd</code> provides features such as building images, and dockerd uses <code>docker-containerd</code>to provide features such as image management and running containers.</p>
-<p>For instance, Docker’s build step is actually just some logic that interprets a Dockerfile, runs the necessary commands in a container using <code>containerd</code>, and saves the resulting container file system as an image.</p>
-<p>That means that the <code>dockerd</code> daemon is at the top of this stack, interfacing with the user commands, while <code>containerd</code> and <code>runc</code> operate at lower layers to provide.</p>
+<p><code class="hljs"><span class="hljs-attribute">dockerd</span></code> provides features such as building images, and dockerd uses <code class="hljs"><span class="hljs-attribute">docker-containerd</span></code>to provide features such as image management and running containers.</p>
+<p>For instance, Docker’s build step is actually just some logic that interprets a Dockerfile, runs the necessary commands in a container using <code class="hljs"><span class="hljs-attribute">containerd</span></code>, and saves the resulting container file system as an image.</p>
+<p>That means that the <code class="hljs"><span class="hljs-attribute">dockerd</span></code> daemon is at the top of this stack, interfacing with the user commands, while <code class="hljs"><span class="hljs-attribute">containerd</span></code> and <code class="hljs"><span class="hljs-attribute">runc</span></code> operate at lower layers to provide.</p>
 <p>When you run a container with Docker, here's a simplified overview of what happens in the background:</p>
 <ol>
 <li class="lvl-3">
-<p>The Docker CLI (<code>docker</code>) takes your command and sends it to the <code>dockerd</code> daemon.</p>
+<p>The Docker CLI (<code class="hljs"><span class="hljs-attribute">docker</span></code>) takes your command and sends it to the <code class="hljs"><span class="hljs-attribute">dockerd</span></code> daemon.</p>
 </li>
 <li class="lvl-3">
-<p><code>dockerd</code> parses the command and communicates with <code>containerd</code> to initiate the container's lifecycle.</p>
+<p><code class="hljs"><span class="hljs-attribute">dockerd</span></code> parses the command and communicates with <code class="hljs"><span class="hljs-attribute">containerd</span></code> to initiate the container's lifecycle.</p>
 </li>
 <li class="lvl-3">
-<p><code>containerd</code> <strong>(high-level runtime)</strong> prepares the container's snapshot (the file system), networking, and other settings. It then calls <code>runc</code> to run the actual container process.</p>
+<p><code class="hljs"><span class="hljs-attribute">containerd</span></code> <strong>(high-level runtime)</strong> prepares the container's snapshot (the file system), networking, and other settings. It then calls <code class="hljs"><span class="hljs-attribute">runc</span></code> to run the actual container process.</p>
 </li>
 <li class="lvl-3">
-<p><code>runc</code> creates and runs the container by invoking the necessary system calls to bring up the container's namespaces, cgroups, and other isolation features.</p>
+<p><code class="hljs"><span class="hljs-attribute">runc</span></code> creates and runs the container by invoking the necessary system calls to bring up the container's namespaces, cgroups, and other isolation features.</p>
 </li>
 </ol>
 <h2 id="containerd-runtime" tabindex="-1">containerd runtime</h2>
-<p><a href="https://containerd.io/">containerd</a> is a high-level runtime that was split off from Docker. Like <code>runc</code>, which was broken off as the low-level runtime piece, containerd was broken off as the high-level runtime piece of Docker.</p>
-<p><code>containerd</code> implements **downloading images, managing them, and running containers</p>
-<p>from images**. When it needs to run a container it unpacks the image into an OCI runtime bundle and shells out to <code>runc</code> to run it</p>
-<p>The containerd command line client is <code>ctr</code></p>
+<p><a href="https://containerd.io/">containerd</a> is a high-level runtime that was split off from Docker. Like <code class="hljs"><span class="hljs-attribute">runc</span></code>, which was broken off as the low-level runtime piece, containerd was broken off as the high-level runtime piece of Docker.</p>
+<p><code class="hljs"><span class="hljs-attribute">containerd</span></code> implements **downloading images, managing them, and running containers</p>
+<p>from images**. When it needs to run a container it unpacks the image into an OCI runtime bundle and shells out to <code class="hljs"><span class="hljs-attribute">runc</span></code> to run it</p>
+<p>The containerd command line client is <code class="hljs"><span class="hljs-attribute">ctr</span></code></p>
 <p>These commands are similar to how a user interacts with Docker. However, in contrast with Docker, containerd is focused solely on <strong>running</strong> containers, so it <strong>does not provide a mechanism for building containers</strong>. Docker was focused on end-user and developer use cases, whereas <strong>containerd is focused on operational use cases, such as running containers on servers</strong>. Tasks such as building container images are left to other tools</p>
 <h2 id="rkt-high-level-runtime" tabindex="-1">rkt high-level runtime</h2>
-<p>Earlier, we noted that <code>rkt</code>is a runtime that has both low-level and high-level features. For instance, much like Docker, rkt allows you to <strong>build</strong> container images, <strong>fetch</strong> and <strong>manage</strong> container images in a local repository, and <strong>run</strong> them all from a <strong>single command</strong>. <code>rkt</code> stops short of Docker’s functionality, however, <strong>in that it doesn’t provide a long-running daemon and remote API</strong></p>
+<p>Earlier, we noted that <code class="hljs"><span class="hljs-attribute">rkt</span></code>is a runtime that has both low-level and high-level features. For instance, much like Docker, rkt allows you to <strong>build</strong> container images, <strong>fetch</strong> and <strong>manage</strong> container images in a local repository, and <strong>run</strong> them all from a <strong>single command</strong>. <code class="hljs"><span class="hljs-attribute">rkt</span></code> stops short of Docker’s functionality, however, <strong>in that it doesn’t provide a long-running daemon and remote API</strong></p>
 <h1 id="references" tabindex="-1">References</h1>
 <p><a href="https://jvns.ca/blog/2016/10/10/what-even-is-a-container/">What even is a container: namespaces and cgroups</a></p>
 <p>Julia Evans - How Containers Work!</p>
