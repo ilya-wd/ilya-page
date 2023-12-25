@@ -9,8 +9,8 @@ const convertedHtmlDirectory = '../blog_files/partial_blogs_html';
 const finalOutputDirectory = '../html/blogs_html';
 const templateHtmlFile = '../html/templates_html/single-blog-template.html';
 
-async function syncFolders() {
-  fs.readdirSync(markdownDirectory).forEach(async (file) => {
+function syncFolders() {
+  fs.readdirSync(markdownDirectory).forEach((file) => {
     if (file.endsWith('.md')) {
       const filePath = path.join(markdownDirectory, file);
       const htmlFilePath = path.join(
@@ -19,7 +19,7 @@ async function syncFolders() {
       );
 
       if (!fs.existsSync(htmlFilePath)) {
-        await markdownToHtml(filePath, convertedHtmlDirectory);
+        markdownToHtml(filePath, convertedHtmlDirectory);
       }
 
       const finalOutputFilePath = path.join(
@@ -34,6 +34,4 @@ async function syncFolders() {
   generateBlogList();
 }
 
-syncFolders().catch((error) => {
-  console.error('Error processing markdown files:', error);
-});
+syncFolders();
