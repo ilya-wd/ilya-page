@@ -290,7 +290,7 @@ $sway-amounts: 100%, -100%;
     $color-transition: sample(1 through length($colors));
 
     &:nth-child(#{$i}) {
-      --square-left-offset: #{random_range(0vw, 90vw)};
+      --square-left-offset: #{random_range(0vw, 70vw)};
       --square-height: #{random_range(3vw, 15vw)};
       --square-float-duration: #{random_range(20s, 40s)};
       --square-float-delay: #{random_range(0s, 20s)};
