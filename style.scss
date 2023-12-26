@@ -255,7 +255,7 @@ $sway-amounts: 100%, -100%;
 .squares {
   position: relative;
   width: 100%;
-  height: 30vh;
+  height: 0vh;
   pointer-events: none;
 }
 
@@ -263,7 +263,7 @@ $sway-amounts: 100%, -100%;
   position: absolute;
   z-index: -1;
   left: var(--square-left-offset);
-  bottom: -40%;
+  opacity: 0;
   display: block;
   width: var(--square-height);
   height: var(--square-height);
@@ -323,10 +323,19 @@ $sway-amounts: 100%, -100%;
 }
 
 @keyframes float-up {
-  to {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  2% {
+    opacity: 1;
+  }
+  100% {
     transform: translateY(-350vh);
   }
 }
+
+// WAVE ANIMATION
 
 .wave {
   animation: wave-animation 10s linear infinite;  

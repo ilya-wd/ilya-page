@@ -9,8 +9,6 @@ const markdownitHighlightJS = require('markdown-it-highlightjs');
 const markdownitIgnore = require('markdown-it-ignore');
 
 const md = new markdownit();
-// md.use(markdownitIgnore, { pattern: /^:::.*\n/gm });
-// md.use(markdownitIgnore, [':::']);
 md.use(markdownitIgnore);
 md.use(markdownitAnchor.default);
 md.use(markdownitHighlightJS, { inline: true });
