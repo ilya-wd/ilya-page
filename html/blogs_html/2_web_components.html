@@ -1,132 +1,465 @@
-<!DOCTYPE html><html lang="en"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ilya's page | Blog post</title>
-    <link rel="stylesheet" href="../../dist/combined.css">
+    <link rel="stylesheet" href="../../dist/combined.css" />
     <script src="../../web_components/Header.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark-dimmed.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/bash.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/js.min.js"></script>
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark-dimmed.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/js.min.js"></script>
+    <script src="/node_modules/two-up-element/dist/two-up.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script> -->
   </head>
   <body>
     <my-header></my-header>
 
     <div class="container mx-auto">
       <div class="grid-container">
-        <div id="toc-location" class="toc"><div class="table-of-contents"><ol><li><a href="#a-look-at-web-components">A Look at Web Components</a><ol><li><a href="#preface">Preface</a></li><li><a href="#definitions">Definitions</a><ol><li><a href="#web-components-are-a-suite-of-standards">Web Components are a suite of standards</a></li><li><a href="#example">Example</a></li></ol></li></ol></li><li><a href="#web-components-and-modern-web">Web Components and Modern Web</a><ol><li><a href="#adoption">Adoption</a></li><li><a href="#good-things">Good things</a></li><li><a href="#not-so-good-things">Not so good things</a></li></ol></li><li><a href="#summing-up">Summing up</a></li><li><a href="#further-reading%3A">Further reading:</a></li></ol></div></div>
-        <div id="blog-content" class="blog-content"><p></p><div class="table-of-contents"><ol><li><a href="#a-look-at-web-components">A Look at Web Components</a><ol><li><a href="#preface">Preface</a></li><li><a href="#definitions">Definitions</a><ol><li><a href="#web-components-are-a-suite-of-standards">Web Components are a suite of standards</a></li><li><a href="#example">Example</a></li></ol></li></ol></li><li><a href="#web-components-and-modern-web">Web Components and Modern Web</a><ol><li><a href="#adoption">Adoption</a></li><li><a href="#good-things">Good things</a></li><li><a href="#not-so-good-things">Not so good things</a></li></ol></li><li><a href="#summing-up">Summing up</a></li><li><a href="#further-reading%3A">Further reading:</a></li></ol></div><p></p>
-<h1 id="a-look-at-web-components" tabindex="-1">A Look at Web Components</h1>
-<h2 id="preface" tabindex="-1">Preface</h2>
-<p>I’ve used Web Components (or WCs) for the first time to build this (<a href="http://ilya.page/">this</a>) website. My use was somewhat rudimentary and primarily concerned with repeated elements, like cards and corresponding dialog elements on the main page. My main goal for my (pretty simple) website was not to use web frameworks and to avoid client-side dependencies.</p>
-<p>But I also didn’t want to write every element in HTML nor use JS with string interpolation as an alternative to templates. Before I started building my website, I had heard about Web Components and decided to try them.</p>
-<p>They are pretty neat for a beginner – no need to configure any dev tools or install anything.</p>
-<p>As they are so neat, a reasonable question arises: is it worth doubling down on them and perhaps using them exclusively, or at least extensively, in my more significant hobby project? To what degree can they replace or augment major web frameworks like React? I decided to read up on it.</p>
-<h2 id="definitions" tabindex="-1">Definitions</h2>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Components">MDN</a> defines Web Components as:</p>
-<blockquote>
-<p>…a <strong>suite</strong> of different technologies allowing you to create <strong>reusable custom elements</strong> — with their functionality <strong>encapsulated away</strong> from the rest of your code — and utilize them in your web apps.</p>
-</blockquote>
-<p>As currently many people’s first touchpoint with the web development is a framework like React, one might quickly conjure up a React component (or Vue or Svelte – I’m only familiar with React, so I will confine myself with the React example).</p>
-<p>That association is valid, but only to a limited degree. That is, both have reusability and composability as one of their goals.</p>
-<p>But a React component, as&nbsp;<a href="https://adactio.com/journal/20618">Jeremy Keith</a>&nbsp;puts it, relies heavily on its props. Not to mention other parts of the framework like hooks (optional) or renderers like React DOM or diffing (mandatory).</p>
-<p>Web Components, on the other hand, are native to the web. They are just Vanilla JS (<a href="http://vanilla-js.com/">the largest cross-platform JS framework</a>&nbsp;😉), HTML, and CSS. They let you define custom HTML components with logic from JS and styles from CSS and inject them into your code as simply as your ordinary HTML elements.</p>
-<p>By native, I mean they have been available in all major browsers since 2020 – no need to download any packages to develop or use them.</p>
-<h3 id="web-components-are-a-suite-of-standards" tabindex="-1">Web Components are a suite of standards</h3>
-<p>As you can note from the MDN’s definition, Web Components is a suite of four&nbsp;<a href="https://www.w3.org/standards/">web standards</a>.</p>
-<p>The four web standards are 4 native web technologies from 4 different HTML specifications.</p>
-<ol>
-<li class="lvl-3">
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template">HTML &lt;template&gt;</a>. JS can consume this template and do something with it if need be</p>
-</li>
-<li class="lvl-3">
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Components/Using_custom_elements">Custom elements</a>. A web developer creates these HTML elements that a browser doesn’t have (and thus is unaware of) by default. Words in the name of a component are separated by a hyphen, like &lt;my-custom-element&gt;</p>
-</li>
-<li class="lvl-3">
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM">Shadow DOM</a>. Shadow DOM is a broader topic out of the 4 concepts on this list and deserves a separate post. For now, it suffices to say that it provides encapsulation to elements. It keeps all the logic and styles within the elements, preventing overflow to the original DOM. That shadow barrier, however, can be penetrated – scroll to slide 60 and below&nbsp;<a href="https://noti.st/davatron5000/k6N2LP/slides">here</a>&nbsp;to learn more.</p>
-</li>
-<li class="lvl-3">
-<p><a href="https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/">ES Modules</a>&nbsp;imports and exports are used to link the components.</p>
-</li>
-</ol>
-<h3 id="example" tabindex="-1">Example</h3>
-<p>Now, let’s take a look at an example. It was last <a href="https://github.com/GoogleChromeLabs/two-up">updated by Google</a> 5 years ago and still works.</p>
-<p>To bring it to this page, all I had to do was install the package from npm (an alternative would be <a href="https://unpkg.com/two-up-element@1">this link</a> in the &lt;script&gt; tag) and put it in my HTML document as &lt;two-up&gt;. And some CSS styles.</p>
-    &lt;div class="demo"&gt;
-        &lt;two-up&gt;
-            &lt;div class="light"&gt;
-                &lt;h1&gt;The Light Side&lt;/h1&gt;
-            &lt;/div&gt;
-            &lt;div class="dark"&gt;
-                &lt;h1&gt;The Dark Side&lt;/h1&gt;
-            &lt;/div&gt;
-        &lt;/two-up&gt;
-    &lt;/div&gt;
-<h1 id="web-components-and-modern-web" tabindex="-1">Web Components and Modern Web</h1>
-<p>Let’s look at the role of Web Components in the web at the beginning of 2024.</p>
-<h2 id="adoption" tabindex="-1">Adoption</h2>
-<p><a href="https://chromestatus.com/metrics/feature/timeline/popularity/1689">According to Google</a>, 20% of pages loaded in Chrome are using WC in January of 2024: a twofold increase in 3 years but only 2.5% increase in 2 years.</p>
-<p>That’s a decent number for a technology with a troubled history (more on that below).</p>
-<p>It doesn’t mean that those 20% of loaded pages were built with Web Components only. For example, they could be used in React or some other framework.</p>
-<p>Moreover, many popular services and big tech firms, including YouTube, use Web Components. Some of them, like YouTube, have been using them even before Web Components came to browsers via libraries like&nbsp;<a href="https://polymer-library.polymer-project.org/3.0/docs/devguide/feature-overview">now-defunct Polymer</a>.</p>
-<p>Polymer might be defunct. But as far as Web Components’ ecosystem is concerned, it’s&nbsp;<a href="https://github.com/lit/lit/">alive</a>&nbsp;and&nbsp;<a href="https://github.com/ionic-team/stencil">well</a>&nbsp;(<a href="https://community.webcomponents.dev/">for the most part</a>).</p>
-<h2 id="good-things" tabindex="-1">Good things</h2>
-<p><em>Here and in the “Not so good things” section, I will briefly go over rather apparent good and, well, not so good things about Web Components. I will not go into much detail – you better check the “Further reading” section at the bottom to delve deeper into the topic.</em></p>
-<ol>
-<li class="lvl-3">
-<p>Web Components are platform and framework-agnostic. As a set of W3C standards, they can be used anywhere on the web, in a framework, or without any. You can even embed them in your Markdown files as you&nbsp;<a href="https://daringfireball.net/projects/markdown/syntax#html">do HTML tags</a>. That essentially makes them&nbsp;<strong>interoperable</strong>&nbsp;– and there’s&nbsp;<a href="https://webcomponents.dev/">a handy tool</a>&nbsp;for that.</p>
-</li>
-<li class="lvl-3">
-<p>WCs are native to the web now. That makes them future-proof, and a website built with them will very, very likely still be up and running 20 years from now, just like&nbsp;<a href="https://www.spacejam.com/1996/">Space Jam from ‘96</a>.</p>
-</li>
-<li class="lvl-3">
-<p>They are simple. Which can be a double-edged sword, as discussed in the next section.</p>
-</li>
-</ol>
-<h2 id="not-so-good-things" tabindex="-1">Not so good things</h2>
-<ol>
-<li class="lvl-3">
-<p>Implemented with chiefly developers in mind, hence as a tool they are relatively low level.</p>
-</li>
-<li class="lvl-3">
-<p>The above also means that Web Components don’t have many out-of-the-box functionalities like the ones in modern major frameworks. For example, routing is problematic. As is&nbsp;<a href="https://css-tricks.com/using-web-components-with-next-or-any-ssr-framework/">server side rendering</a>, with some Web Components libraries providing&nbsp;<a href="https://lit.dev/docs/ssr/overview/">limited SSR to own components</a>. So, you still need some framework to get those handy abstractions in your toolbox.</p>
-</li>
-<li class="lvl-3">
-<p>Problematic marketing and publicity. Started more than a decade ago, Web Components has only begun getting traction in the past few years. Seeing the explosive growth of component-based frameworks on the one hand, many in the dev community questioned the relevance and timeliness of WCs. Now, the tide seems to turn for Web Components, with more and more community members praising WCs in the past year for what they are. The discussion isn’t one way, though. Here’s&nbsp;<a href="https://blog.carlana.net/post/2023/web-component-alternative-futures/">an outstanding article</a>, both in terms of the sentiment and approach to the topic, asserting that Web Components solve problems wrongly and in the wrong way. Definitely worth a read.</p>
-</li>
-<li class="lvl-3">
-<p>They are incompatible with older browsers. The further we go, the less acute this problem becomes, however.</p>
-</li>
-<li class="lvl-3">
-<p>Problems with CSS styling. As&nbsp;<a href="https://daverupert.com/2021/10/html-with-superpowers/">Dave Rupert</a>, an advocate for Web Components, puts it:</p>
-</li>
-</ol>
-<blockquote>
-<p>Styling Web Components is the biggest foot gun of the entire Web Component system because it involves something called “Piercing the Shadow DOM”. The Shadow DOM is a boundary inside the component where no styles bleed in, and no styles bleed out… but some styles do pass through!</p>
-</blockquote>
-<ol>
-<li class="lvl-3">
-<p>The fact they are a (set of) Web Standard(s) makes them change really slowly.</p>
-</li>
-</ol>
-<h1 id="summing-up" tabindex="-1">Summing up</h1>
-<p>Comparing the two lists above, one might think the cons outweigh the pros. It’s not a number competition, however. The simplicity and nativity to the web of WCs make them a good choice for many use cases.</p>
-<p>Yes, there’s a list of problems. Many of them are the sprouts of discussions about the web, as Web Standards are a pretty big thing that reasonably involves a lot of people, many of whom want to pitch in. And yes, these problems are not quick to solve because they reside in Web Standards, which require lots of considerations and thorough planning to change.</p>
-<p>On the bright side, there are already established libraries, like&nbsp;<a href="https://github.com/lit/lit">Lit</a>&nbsp;or&nbsp;<a href="https://stenciljs.com/">Stencil</a>, that bring better developer and user experiences, and&nbsp;<a href="https://enhance.dev/">many</a>&nbsp;<a href="https://www.11ty.dev/docs/languages/webc/">more</a>&nbsp;smaller&nbsp;<a href="https://github.com/modernweb-dev/rocket">ones</a>&nbsp;are being created.</p>
-<p>As for my part, I will probably continue to use them in smaller things and will observe how they and the community around them evolve.</p>
-<h1 id="further-reading%3A" tabindex="-1">Further reading:</h1>
-<p><a href="https://blog.jim-nielsen.com/2023/html-web-components/">https://blog.jim-nielsen.com/2023/html-web-components/</a></p>
-<p><a href="https://www.abeautifulsite.net/posts/a-web-component-story/">https://www.abeautifulsite.net/posts/a-web-component-story/</a></p>
-<p><a href="https://adactio.com/journal/20618">https://adactio.com/journal/20618</a></p>
-<p><a href="https://buttondown.email/cascade/archive/005-why-web-components/">https://buttondown.email/cascade/archive/005-why-web-components/</a></p>
-<p><a href="https://daverupert.com/2021/10/html-with-superpowers/">https://daverupert.com/2021/10/html-with-superpowers/</a></p>
-<p><a href="https://jakelazaroff.com/words/web-components-will-outlive-your-javascript-framework/">https://jakelazaroff.com/words/web-components-will-outlive-your-javascript-framework/</a></p>
-<p><a href="https://www.zachleat.com/web/?category=web-components">https://www.zachleat.com/web/?category=web-components</a></p>
-<p><a href="https://meyerweb.com/eric/thoughts/2023/11/01/blinded-by-the-light-dom/">https://meyerweb.com/eric/thoughts/2023/11/01/blinded-by-the-light-dom/</a></p>
-<p><a href="https://noti.st/davatron5000/k6N2LP/slides">https://noti.st/davatron5000/k6N2LP/slides</a></p>
-<p><a href="https://blog.carlana.net/post/2023/web-component-alternative-futures/">**https://blog.carlana.net/post/2023/web-component-alternative-futures/</a>**</p>
-</div>
+        <div id="toc-location" class="toc">
+          <div class="table-of-contents">
+            <ol>
+              <li>
+                <a href="#a-look-at-web-components">A Look at Web Components</a>
+                <ol>
+                  <li><a href="#preface">Preface</a></li>
+                  <li>
+                    <a href="#definitions">Definitions</a>
+                    <ol>
+                      <li>
+                        <a href="#web-components-are-a-suite-of-standards"
+                          >Web Components are a suite of standards</a
+                        >
+                      </li>
+                      <li><a href="#example">Example</a></li>
+                    </ol>
+                  </li>
+                </ol>
+              </li>
+              <li>
+                <a href="#web-components-and-modern-web">Web Components and Modern Web</a>
+                <ol>
+                  <li><a href="#adoption">Adoption</a></li>
+                  <li><a href="#good-things">Good things</a></li>
+                  <li><a href="#not-so-good-things">Not so good things</a></li>
+                </ol>
+              </li>
+              <li><a href="#summing-up">Summing up</a></li>
+              <li><a href="#further-reading%3A">Further reading:</a></li>
+            </ol>
+          </div>
+        </div>
+        <div id="blog-content" class="blog-content">
+          <p></p>
+          <div class="table-of-contents">
+            <ol>
+              <li>
+                <a href="#a-look-at-web-components">A Look at Web Components</a>
+                <ol>
+                  <li><a href="#preface">Preface</a></li>
+                  <li>
+                    <a href="#definitions">Definitions</a>
+                    <ol>
+                      <li>
+                        <a href="#web-components-are-a-suite-of-standards"
+                          >Web Components are a suite of standards</a
+                        >
+                      </li>
+                      <li><a href="#example">Example</a></li>
+                    </ol>
+                  </li>
+                </ol>
+              </li>
+              <li>
+                <a href="#web-components-and-modern-web">Web Components and Modern Web</a>
+                <ol>
+                  <li><a href="#adoption">Adoption</a></li>
+                  <li><a href="#good-things">Good things</a></li>
+                  <li><a href="#not-so-good-things">Not so good things</a></li>
+                </ol>
+              </li>
+              <li><a href="#summing-up">Summing up</a></li>
+              <li><a href="#further-reading%3A">Further reading:</a></li>
+            </ol>
+          </div>
+          <p></p>
+          <h1 id="a-look-at-web-components" tabindex="-1">A Look at Web Components</h1>
+          <h2 id="preface" tabindex="-1">Preface</h2>
+          <p>
+            I’ve used Web Components (or WCs) for the first time to build this (<a
+              href="http://ilya.page/"
+              >this</a
+            >) website. My use was somewhat rudimentary and primarily concerned with
+            repeated elements, like cards and corresponding dialog elements on the main
+            page. My main goal for my (pretty simple) website was not to use web
+            frameworks and to avoid client-side dependencies.
+          </p>
+          <p>
+            But I also didn’t want to write every element in HTML nor use JS with string
+            interpolation as an alternative to templates. Before I started building my
+            website, I had heard about Web Components and decided to try them.
+          </p>
+          <p>
+            They are pretty neat for a beginner – no need to configure any dev tools or
+            install anything.
+          </p>
+          <p>
+            As they are so neat, a reasonable question arises: is it worth doubling down
+            on them and perhaps using them exclusively, or at least extensively, in my
+            more significant hobby project? To what degree can they replace or augment
+            major web frameworks like React? I decided to read up on it.
+          </p>
+          <h2 id="definitions" tabindex="-1">Definitions</h2>
+          <p>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Components"
+              >MDN</a
+            >
+            defines Web Components as:
+          </p>
+          <blockquote>
+            <p>
+              …a <strong>suite</strong> of different technologies allowing you to create
+              <strong>reusable custom elements</strong> — with their functionality
+              <strong>encapsulated away</strong> from the rest of your code — and utilize
+              them in your web apps.
+            </p>
+          </blockquote>
+          <p>
+            As currently many people’s first touchpoint with the web development is a
+            framework like React, one might quickly conjure up a React component (or Vue
+            or Svelte – I’m only familiar with React, so I will confine myself with the
+            React example).
+          </p>
+          <p>
+            That association is valid, but only to a limited degree. That is, both have
+            reusability and composability as one of their goals.
+          </p>
+          <p>
+            But a React component, as&nbsp;<a href="https://adactio.com/journal/20618"
+              >Jeremy Keith</a
+            >&nbsp;puts it, relies heavily on its props. Not to mention other parts of the
+            framework like hooks (optional) or renderers like React DOM or diffing
+            (mandatory).
+          </p>
+          <p>
+            Web Components, on the other hand, are native to the web. They are just
+            Vanilla JS (<a href="http://vanilla-js.com/"
+              >the largest cross-platform JS framework</a
+            >&nbsp;😉), HTML, and CSS. They let you define custom HTML components with
+            logic from JS and styles from CSS and inject them into your code as simply as
+            your ordinary HTML elements.
+          </p>
+          <p>
+            By native, I mean they have been available in all major browsers since 2020 –
+            no need to download any packages to develop or use them.
+          </p>
+          <h3 id="web-components-are-a-suite-of-standards" tabindex="-1">
+            Web Components are a suite of standards
+          </h3>
+          <p>
+            As you can note from the MDN’s definition, Web Components is a suite of
+            four&nbsp;<a href="https://www.w3.org/standards/">web standards</a>.
+          </p>
+          <p>
+            The four web standards are 4 native web technologies from 4 different HTML
+            specifications.
+          </p>
+          <ol>
+            <li class="lvl-3">
+              <p>
+                <a
+                  href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template"
+                  >HTML &lt;template&gt;</a
+                >. JS can consume this template and do something with it if need be
+              </p>
+            </li>
+            <li class="lvl-3">
+              <p>
+                <a
+                  href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Components/Using_custom_elements"
+                  >Custom elements</a
+                >. A web developer creates these HTML elements that a browser doesn’t have
+                (and thus is unaware of) by default. Words in the name of a component are
+                separated by a hyphen, like &lt;my-custom-element&gt;
+              </p>
+            </li>
+            <li class="lvl-3">
+              <p>
+                <a
+                  href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM"
+                  >Shadow DOM</a
+                >. Shadow DOM is a broader topic out of the 4 concepts on this list and
+                deserves a separate post. For now, it suffices to say that it provides
+                encapsulation to elements. It keeps all the logic and styles within the
+                elements, preventing overflow to the original DOM. That shadow barrier,
+                however, can be penetrated – scroll to slide 60 and below&nbsp;<a
+                  href="https://noti.st/davatron5000/k6N2LP/slides"
+                  >here</a
+                >&nbsp;to learn more.
+              </p>
+            </li>
+            <li class="lvl-3">
+              <p>
+                <a
+                  href="https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/"
+                  >ES Modules</a
+                >&nbsp;imports and exports are used to link the components.
+              </p>
+            </li>
+          </ol>
+          <h3 id="example" tabindex="-1">Example</h3>
+          <p>
+            Now, let’s take a look at an example. It was last
+            <a href="https://github.com/GoogleChromeLabs/two-up">updated by Google</a> 5
+            years ago and still works.
+          </p>
+          <p>
+            To bring it to this page, all I had to do was install the package from npm (an
+            alternative would be
+            <a href="https://unpkg.com/two-up-element@1">this link</a> in the
+            &lt;script&gt; tag) and put it in my HTML document as &lt;two-up&gt;. And some
+            CSS styles.
+          </p>
+          <div class="demo">
+            <two-up>
+              <div class="light">
+                <h1>Web</h1>
+              </div>
+              <div class="dark">
+                <h1>Component</h1>
+              </div>
+            </two-up>
+          </div>
+          <h1 id="web-components-and-modern-web" tabindex="-1">
+            Web Components and Modern Web
+          </h1>
+          <p>
+            Let’s look at the role of Web Components in the web at the beginning of 2024.
+          </p>
+          <h2 id="adoption" tabindex="-1">Adoption</h2>
+          <p>
+            <a href="https://chromestatus.com/metrics/feature/timeline/popularity/1689"
+              >According to Google</a
+            >, 20% of pages loaded in Chrome are using WC in January of 2024: a twofold
+            increase in 3 years but only 2.5% increase in 2 years.
+          </p>
+          <p>
+            That’s a decent number for a technology with a troubled history (more on that
+            below).
+          </p>
+          <p>
+            It doesn’t mean that those 20% of loaded pages were built with Web Components
+            only. For example, they could be used in React or some other framework.
+          </p>
+          <p>
+            Moreover, many popular services and big tech firms, including YouTube, use Web
+            Components. Some of them, like YouTube, have been using them even before Web
+            Components came to browsers via libraries like&nbsp;<a
+              href="https://polymer-library.polymer-project.org/3.0/docs/devguide/feature-overview"
+              >now-defunct Polymer</a
+            >.
+          </p>
+          <p>
+            Polymer might be defunct. But as far as Web Components’ ecosystem is
+            concerned, it’s&nbsp;<a href="https://github.com/lit/lit/">alive</a
+            >&nbsp;and&nbsp;<a href="https://github.com/ionic-team/stencil">well</a
+            >&nbsp;(<a href="https://community.webcomponents.dev/">for the most part</a>).
+          </p>
+          <h2 id="good-things" tabindex="-1">Good things</h2>
+          <p>
+            <em
+              >Here and in the “Not so good things” section, I will briefly go over rather
+              apparent good and, well, not so good things about Web Components. I will not
+              go into much detail – you better check the “Further reading” section at the
+              bottom to delve deeper into the topic.</em
+            >
+          </p>
+          <ol>
+            <li class="lvl-3">
+              <p>
+                Web Components are platform and framework-agnostic. As a set of W3C
+                standards, they can be used anywhere on the web, in a framework, or
+                without any. You can even embed them in your Markdown files as you&nbsp;<a
+                  href="https://daringfireball.net/projects/markdown/syntax#html"
+                  >do HTML tags</a
+                >. That essentially makes them&nbsp;<strong>interoperable</strong>&nbsp;–
+                and there’s&nbsp;<a href="https://webcomponents.dev/">a handy tool</a
+                >&nbsp;for that.
+              </p>
+            </li>
+            <li class="lvl-3">
+              <p>
+                WCs are native to the web now. That makes them future-proof, and a website
+                built with them will very, very likely still be up and running 20 years
+                from now, just like&nbsp;<a href="https://www.spacejam.com/1996/"
+                  >Space Jam from ‘96</a
+                >.
+              </p>
+            </li>
+            <li class="lvl-3">
+              <p>
+                They are simple. Which can be a double-edged sword, as discussed in the
+                next section.
+              </p>
+            </li>
+          </ol>
+          <h2 id="not-so-good-things" tabindex="-1">Not so good things</h2>
+          <ol>
+            <li class="lvl-3">
+              <p>
+                Implemented with chiefly developers in mind, hence as a tool they are
+                relatively low level.
+              </p>
+            </li>
+            <li class="lvl-3">
+              <p>
+                The above also means that Web Components don’t have many out-of-the-box
+                functionalities like the ones in modern major frameworks. For example,
+                routing is problematic. As is&nbsp;<a
+                  href="https://css-tricks.com/using-web-components-with-next-or-any-ssr-framework/"
+                  >server side rendering</a
+                >, with some Web Components libraries providing&nbsp;<a
+                  href="https://lit.dev/docs/ssr/overview/"
+                  >limited SSR to own components</a
+                >. So, you still need some framework to get those handy abstractions in
+                your toolbox.
+              </p>
+            </li>
+            <li class="lvl-3">
+              <p>
+                Problematic marketing and publicity. Started more than a decade ago, Web
+                Components has only begun getting traction in the past few years. Seeing
+                the explosive growth of component-based frameworks on the one hand, many
+                in the dev community questioned the relevance and timeliness of WCs. Now,
+                the tide seems to turn for Web Components, with more and more community
+                members praising WCs in the past year for what they are. The discussion
+                isn’t one way, though. Here’s&nbsp;<a
+                  href="https://blog.carlana.net/post/2023/web-component-alternative-futures/"
+                  >an outstanding article</a
+                >, both in terms of the sentiment and approach to the topic, asserting
+                that Web Components solve problems wrongly and in the wrong way.
+                Definitely worth a read.
+              </p>
+            </li>
+            <li class="lvl-3">
+              <p>
+                They are incompatible with older browsers. The further we go, the less
+                acute this problem becomes, however.
+              </p>
+            </li>
+            <li class="lvl-3">
+              <p>
+                Problems with CSS styling. As&nbsp;<a
+                  href="https://daverupert.com/2021/10/html-with-superpowers/"
+                  >Dave Rupert</a
+                >, an advocate for Web Components, puts it:
+              </p>
+            </li>
+          </ol>
+          <blockquote>
+            <p>
+              Styling Web Components is the biggest foot gun of the entire Web Component
+              system because it involves something called “Piercing the Shadow DOM”. The
+              Shadow DOM is a boundary inside the component where no styles bleed in, and
+              no styles bleed out… but some styles do pass through!
+            </p>
+          </blockquote>
+          <ol>
+            <li class="lvl-3">
+              <p>
+                The fact they are a (set of) Web Standard(s) makes them change really
+                slowly.
+              </p>
+            </li>
+          </ol>
+          <h1 id="summing-up" tabindex="-1">Summing up</h1>
+          <p>
+            Comparing the two lists above, one might think the cons outweigh the pros.
+            It’s not a number competition, however. The simplicity and nativity to the web
+            of WCs make them a good choice for many use cases.
+          </p>
+          <p>
+            Yes, there’s a list of problems. Many of them are the sprouts of discussions
+            about the web, as Web Standards are a pretty big thing that reasonably
+            involves a lot of people, many of whom want to pitch in. And yes, these
+            problems are not quick to solve because they reside in Web Standards, which
+            require lots of considerations and thorough planning to change.
+          </p>
+          <p>
+            On the bright side, there are already established libraries, like&nbsp;<a
+              href="https://github.com/lit/lit"
+              >Lit</a
+            >&nbsp;or&nbsp;<a href="https://stenciljs.com/">Stencil</a>, that bring better
+            developer and user experiences, and&nbsp;<a href="https://enhance.dev/"
+              >many</a
+            >&nbsp;<a href="https://www.11ty.dev/docs/languages/webc/">more</a
+            >&nbsp;smaller&nbsp;<a href="https://github.com/modernweb-dev/rocket">ones</a
+            >&nbsp;are being created.
+          </p>
+          <p>
+            As for my part, I will probably continue to use them in smaller things and
+            will observe how they and the community around them evolve.
+          </p>
+          <h1 id="further-reading%3A" tabindex="-1">Further reading:</h1>
+          <p>
+            <a href="https://blog.jim-nielsen.com/2023/html-web-components/"
+              >https://blog.jim-nielsen.com/2023/html-web-components/</a
+            >
+          </p>
+          <p>
+            <a href="https://www.abeautifulsite.net/posts/a-web-component-story/"
+              >https://www.abeautifulsite.net/posts/a-web-component-story/</a
+            >
+          </p>
+          <p>
+            <a href="https://adactio.com/journal/20618"
+              >https://adactio.com/journal/20618</a
+            >
+          </p>
+          <p>
+            <a href="https://buttondown.email/cascade/archive/005-why-web-components/"
+              >https://buttondown.email/cascade/archive/005-why-web-components/</a
+            >
+          </p>
+          <p>
+            <a href="https://daverupert.com/2021/10/html-with-superpowers/"
+              >https://daverupert.com/2021/10/html-with-superpowers/</a
+            >
+          </p>
+          <p>
+            <a
+              href="https://jakelazaroff.com/words/web-components-will-outlive-your-javascript-framework/"
+              >https://jakelazaroff.com/words/web-components-will-outlive-your-javascript-framework/</a
+            >
+          </p>
+          <p>
+            <a href="https://www.zachleat.com/web/?category=web-components"
+              >https://www.zachleat.com/web/?category=web-components</a
+            >
+          </p>
+          <p>
+            <a
+              href="https://meyerweb.com/eric/thoughts/2023/11/01/blinded-by-the-light-dom/"
+              >https://meyerweb.com/eric/thoughts/2023/11/01/blinded-by-the-light-dom/</a
+            >
+          </p>
+          <p>
+            <a href="https://noti.st/davatron5000/k6N2LP/slides"
+              >https://noti.st/davatron5000/k6N2LP/slides</a
+            >
+          </p>
+          <p>
+            <a
+              href="https://blog.carlana.net/post/2023/web-component-alternative-futures/"
+              >**https://blog.carlana.net/post/2023/web-component-alternative-futures/</a
+            >**
+          </p>
+        </div>
+      </div>
     </div>
-  </div>
-  
-</body></html>
+  </body>
+</html>
