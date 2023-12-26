@@ -12,7 +12,8 @@
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/bash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/js.min.js"></script>
-    <script src="/node_modules/two-up-element/dist/two-up.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/html.min.js"></script>
+    <script src="https://unpkg.com/two-up-element@1"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script> -->
   </head>
   <body>
@@ -218,12 +219,25 @@
             years ago and still works.
           </p>
           <p>
-            To bring it to this page, all I had to do was install the package from npm (an
-            alternative would be
-            <a href="https://unpkg.com/two-up-element@1">this link</a> in the
-            &lt;script&gt; tag) and put it in my HTML document as &lt;two-up&gt;. And some
-            CSS styles.
+            To bring it to this page, you can either install
+            <a href="https://www.npmjs.com/package/two-up-element"
+              >the package from npm</a
+            >
+            or use <a href="https://unpkg.com/two-up-element@1">this link</a> in the
+            &lt;script&gt; tag. Then you use it in HTML document as &lt;two-up&gt;. Oh,
+            and add some CSS styles. The code and the element are below:
           </p>
+          <pre><code class="hljs language-html">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"demo"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">two-up</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"light"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Web<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dark"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Component<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">two-up</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
           <div class="demo">
             <two-up>
               <div class="light">
