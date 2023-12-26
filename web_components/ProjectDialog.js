@@ -161,7 +161,7 @@ class ProjectDialog extends HTMLElement {
           }
           @media screen and (max-width: 480px) {
             .project-dialog {
-              max-width: 300px;
+              max-width: 280px;
             }
           }
       `;
