@@ -56,7 +56,7 @@
       "dialogId": "junction-dialog",
       "title": "MeMo (Junction 2023)",
       "description": "Mobile app that deals with sedentary lifestyle among young children by cultivating healthy habits early in life.",
-      "dialogContent": "[\"First hackathon experience\", \"Developed over the course of two days\", \"Main feature is a competitive mode, with winning condition to jump faster\"]",
+      "dialogContent": "[\"First hackathon experience\", \"Developed over the course of two days\", \"Main feature is a competitive mode. The winner among two participants using dfferent devices is the one who jumps faster – as tracked with accelerometer and gyroscope \"]",
       "image": "assets/project_images/junction.png",
       "company": "Personal project",
       "companyLink": "",
