@@ -27,7 +27,7 @@ class Header extends HTMLElement {
     const githubLink = document.createElement('a');
     githubLink.href = 'https://www.github.com/ilya-wd';
     const githubIcon = document.createElement('img');
-    githubIcon.target = '_blank';
+    githubLink.target = '_blank';
     githubIcon.src = '/assets/logos/github-mark.svg';
     githubIcon.alt = 'GitHub';
     githubLink.appendChild(githubIcon);

@@ -289,7 +289,7 @@ $sway-amounts: 100%, -100%;
     &:nth-child(#{$i}) {
       --square-left-offset: #{random_range(0vw, 80vw)};
       --square-height: #{random_range(3vw, 15vw)};
-      --square-float-duration: #{random_range(20s, 50s)};
+      --square-float-duration: #{random_range(30s, 60s)};
       --square-float-delay: #{random_range(0s, 20s)};
       --square-rotation-duration: #{random_range(15s, 50s)};
       --square-sway-rotate-keyframe: sway-rotate-#{$i};
