@@ -17,7 +17,7 @@
       "dialogId": "vr-dialog",
       "title": "VR Matkalla App (Feature)",
       "description": "VR Matkalla is an app of the state owned railway company VR used by over 100 000 people every month. Our front end feature provides customers a personalized summary of their rail travel history over the past year to increase user engagement and brand loyalty.",
-      "dialogContent": "[\"Student developer in a 9-month-long project\", \"Designed and implemented a feature for the VR's mobile app from the ground up in close collaboration with VR.\", \"Delivered production-ready code conforming to the corporate standards including tests, accessiblity features, internationalization.\"]",
+      "dialogContent": "[\"Student developer in a 9-month-long project\", \"Designed and implemented a feature for the VR's mobile app from the ground up in close collaboration with VR.\", \"Delivered production-ready code conforming to the corporate standards including tests, accessiblity features, internationalization.\", , \"The feature was released in Dec 2023.\"]",
       "image": "assets/project_images/vr-project.png",
       "company": "VR | Aalto University",
       "companyLink": "https://www.vr.fi/",
