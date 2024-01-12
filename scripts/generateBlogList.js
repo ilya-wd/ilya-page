@@ -14,7 +14,6 @@ function extractTitleFromHtml(htmlContent) {
 }
 
 function generateBlogList() {
-  // let htmlContent = '<ol class="list-of-posts">\n';
   let htmlContent = '<ol>\n';
 
   fs.readdirSync(blogsHtmlDir).forEach((file) => {
@@ -43,5 +42,4 @@ function generateBlogList() {
   }
 }
 
-// generateBlogList();
 module.exports = generateBlogList;

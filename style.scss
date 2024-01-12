@@ -1,12 +1,10 @@
 // MAIN STYLES
 body {
   background: rgb(237, 237, 237);
-  margin: 0; 
 }
 
 .main-body {
   max-width: 1000px;
-  margin: 0 auto;
 }
 
 @media screen and (max-width: 1200px) {
@@ -160,9 +158,18 @@ details p{
   padding: 1rem;
   margin: 50px auto;
   border: solid  2px;
-  box-shadow: 10px 10px 0 0 gray,
+  box-shadow: 10px 10px 0 0 gray;
 }
 
+@media screen and (max-width: 768px) {
+  #list-of-blogs {
+      padding: 15px; 
+      max-width: 100%; 
+  }
+  #list-of-blogs ol {
+      padding-left: 15px;
+  }
+}
 
 #list-of-blogs {
   margin: 0 auto; 
@@ -193,15 +200,6 @@ details p{
 }
 
 
-@media screen and (max-width: 768px) {
-  #list-of-blogs {
-      padding: 15px; 
-      max-width: 100%; 
-  }
-  #list-of-blogs ol {
-      padding-left: 15px;
-  }
-}
 // TWO UP ELEMENT
 
 .demo {
@@ -255,11 +253,13 @@ $sway-amounts: 100%, -100%;
 .squares {
   position: relative;
   width: 100%;
-  height: 0vh;
+  // height: 0vh;
   pointer-events: none;
+  bottom: 100%;
 }
 
 .square {
+  bottom: 100%;
   position: absolute;
   z-index: -1;
   left: var(--square-left-offset);

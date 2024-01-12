@@ -63,7 +63,6 @@ class ProjectCard extends HTMLElement {
     }
     .title {
       font-weight: bold;
-      // margin-right: 5px;
     }
     .project-card:hover {
       transform: scale(1.05);
