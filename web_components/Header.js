@@ -18,8 +18,8 @@ class Header extends HTMLElement {
     blogLink.href = '/html/blogs-main.html';
     blogLink.classList.add('nav-link');
 
-    nav.appendChild(homeLink);
-    nav.appendChild(blogLink);
+    // nav.appendChild(homeLink);
+    // nav.appendChild(blogLink);
 
     const iconContainer = document.createElement('div');
     iconContainer.setAttribute('class', 'icon-container');
