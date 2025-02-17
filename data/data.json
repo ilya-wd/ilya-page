@@ -1,5 +1,31 @@
 [
     {
+    "id": "netvisor-mobile",
+    "dialogId": "netvisor-mobile-dialog",
+    "title": "TAS for Netvisor Mobile",
+    "description": "Netvisor is the leading financial management software in Finland. The test automation system ensures the quality of the new mobile app.",
+    "dialogContent": "[\"Building a test automation system from scratch \",\"Creating and maintaining test scripts \",\"Identifying test requirements\",\"Manual and exploratory testing\",\"Integration of the testing system into the development workflow\"]",
+    "image": "assets/project_images/netvisor.png",
+    "company": "Visma",
+    "companyLink": "https://www.visma.com/",
+    "projectLink": "https://netvisor.fi/",
+    "githubLink": "",
+    "techUsed": "[\"NodeJS\", \"WebdriverIO\", \"Appium\", \"Mocha\", \"Allure\", \"BrowserStack\", \"Git\", \"GitHub Actions\"]"
+    },
+    {
+    "id": "complink",
+    "dialogId": "complink-dialog",
+    "title": "Compliance Assistant",
+    "description": "A software for construction industry. During my involvement before the pivot, it was a compliance assistance tool for architects and designers.",
+    "dialogContent": "[\"Started the project as part of the founding team \",\"Developed UI for the personal dashboard \",\"Defined core features and UX required for the MVP\"]",
+    "image": "assets/project_images/complink.png",
+    "company": "Complink",
+    "companyLink": "",
+    "projectLink": "https://complink.fi",
+    "githubLink": "",
+    "techUsed": "[\"TypeScript\", \"Next.js\", \"React\"]"
+    },
+    {
     "id": "csc-mscr",
     "dialogId": "csc-mscr-dialog",
     "title": "Metadata Schema and Crosswalk Registry (MSCR)",
@@ -17,7 +43,7 @@
     "dialogId": "vr-dialog",
     "title": "VR Matkalla App (Feature)",
     "description": "VR Matkalla is an app of the state owned railway company VR used by over 100 000 people every month. Our front end feature provides customers a personalized summary of their rail travel history over the past year to increase user engagement and brand loyalty.",
-    "dialogContent": "[\"Student developer in a 9-month-long project\", \"Designed and implemented a feature for the VR's mobile app from the ground up in close collaboration with VR.\", \"Delivered production-ready code conforming to the corporate standards including tests, accessiblity features, internationalization.\", \"The feature was released in Dec 2023.\"]",
+    "dialogContent": "[\"Student developer in a 9-month-long project\", \"Designed and implemented a feature for the VR's mobile app from the ground up in close collaboration with VR\", \"Delivered production-ready code conforming to the corporate standards including tests, accessiblity features, internationalization\", \"The feature was released in Dec 2023\"]",
     "image": "assets/project_images/vr-project.png",
     "company": "VR | Aalto University",
     "companyLink": "https://www.vr.fi/",
